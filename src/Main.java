@@ -16,8 +16,7 @@ public class Main {
 		String s = reservation.toString();
 		System.out.println(s);	
 		Ticket ticket = new Ticket(reservation);
-		
-		
+				
 		//database connection
 		String username = "postgres";
 		String password = "12345";
