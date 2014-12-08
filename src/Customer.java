@@ -2,7 +2,7 @@ import java.util.Date;
 
 
 public class Customer {
-	private String customerSocialGroup;
+	private String customerSocialGroup;//rename to tariff 
 
 	
 	public Customer(String customerSocialGroup) {
