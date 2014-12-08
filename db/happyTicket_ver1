@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2014-12-08 13:11:22 EET
+-- Started on 2014-12-08 22:56:56 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -58,14 +58,14 @@ ALTER TABLE public.distance OWNER TO postgres;
 CREATE TABLE reservation (
     reservation_id integer NOT NULL,
     email character varying(30),
-    fisrt_name character varying(20),
+    first_name character varying(20),
     last_name character varying(20),
     wagon_id integer,
     seat integer,
     origin_station character varying(20),
     destination_station character varying(20),
-    date date,
-    expiration_date character varying(10)
+    travel_date date,
+    expiration_data character varying(10)
 );
 
 
@@ -132,8 +132,8 @@ ALTER TABLE public.train_schedule OWNER TO postgres;
 CREATE TABLE train_station (
     train_id character varying(5) NOT NULL,
     station_id integer NOT NULL,
-    departure_time timestamp without time zone,
-    arrival_time timestamp without time zone,
+    departure_time time without time zone,
+    arrival_time time without time zone,
     station_number integer
 );
 
@@ -176,6 +176,10 @@ ALTER TABLE public.wagon OWNER TO postgres;
 --
 
 COPY distance (arrival_station, departure_station, distance) FROM stdin;
+105	104	158
+104	103	87
+103	102	252
+102	101	14
 \.
 
 
@@ -185,7 +189,7 @@ COPY distance (arrival_station, departure_station, distance) FROM stdin;
 -- Data for Name: reservation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY reservation (reservation_id, email, fisrt_name, last_name, wagon_id, seat, origin_station, destination_station, date, expiration_date) FROM stdin;
+COPY reservation (reservation_id, email, first_name, last_name, wagon_id, seat, origin_station, destination_station, travel_date, expiration_data) FROM stdin;
 \.
 
 
@@ -206,6 +210,11 @@ COPY schedule (schedule_id, schedule_type) FROM stdin;
 --
 
 COPY station (station_id, station_name) FROM stdin;
+101	Київ Пасажирський
+102	Дарниця
+103	Миргород
+104	Полтава Київська
+105	Харків
 \.
 
 
@@ -216,6 +225,7 @@ COPY station (station_id, station_name) FROM stdin;
 --
 
 COPY train (train_id, train_num, type) FROM stdin;
+721O	721	ІнтерСіті
 \.
 
 
@@ -236,6 +246,11 @@ COPY train_schedule (train_id, schedule_id) FROM stdin;
 --
 
 COPY train_station (train_id, station_id, departure_time, arrival_time, station_number) FROM stdin;
+721O	105	18:39:00	18:39:00	1
+721O	104	20:15:00	20:13:00	2
+721O	103	21:07:00	21:05:00	3
+721O	102	23:03:00	23:02:00	4
+721O	101	23:16:00	23:16:00	5
 \.
 
 
@@ -433,7 +448,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-12-08 13:11:22 EET
+-- Completed on 2014-12-08 22:56:56 EET
 
 --
 -- PostgreSQL database dump complete
