@@ -1,0 +1,456 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.3.5
+-- Started on 2014-12-08 22:56:56 EET
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 179 (class 3079 OID 11789)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2042 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 176 (class 1259 OID 32836)
+-- Name: distance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE distance (
+    arrival_station integer NOT NULL,
+    departure_station integer NOT NULL,
+    distance integer
+);
+
+
+ALTER TABLE public.distance OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 32776)
+-- Name: reservation; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE reservation (
+    reservation_id integer NOT NULL,
+    email character varying(30),
+    first_name character varying(20),
+    last_name character varying(20),
+    wagon_id integer,
+    seat integer,
+    origin_station character varying(20),
+    destination_station character varying(20),
+    travel_date date,
+    expiration_data character varying(10)
+);
+
+
+ALTER TABLE public.reservation OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 32851)
+-- Name: schedule; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE schedule (
+    schedule_id integer NOT NULL,
+    schedule_type character varying(20)
+);
+
+
+ALTER TABLE public.schedule OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 32819)
+-- Name: station; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE station (
+    station_id integer NOT NULL,
+    station_name character varying(20)
+);
+
+
+ALTER TABLE public.station OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 32801)
+-- Name: train; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE train (
+    train_id character varying NOT NULL,
+    train_num integer,
+    type character varying(10)
+);
+
+
+ALTER TABLE public.train OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 32871)
+-- Name: train_schedule; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE train_schedule (
+    train_id character varying(5) NOT NULL,
+    schedule_id integer NOT NULL
+);
+
+
+ALTER TABLE public.train_schedule OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 32814)
+-- Name: train_station; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE train_station (
+    train_id character varying(5) NOT NULL,
+    station_id integer NOT NULL,
+    departure_time time without time zone,
+    arrival_time time without time zone,
+    station_number integer
+);
+
+
+ALTER TABLE public.train_station OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 32781)
+-- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "user" (
+    email character varying(30) NOT NULL,
+    name character varying(10)
+);
+
+
+ALTER TABLE public."user" OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 32791)
+-- Name: wagon; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE wagon (
+    wagon_id integer NOT NULL,
+    train_id character varying(5),
+    wagon_num integer,
+    seats_num integer,
+    wagon_type character varying(10)
+);
+
+
+ALTER TABLE public.wagon OWNER TO postgres;
+
+--
+-- TOC entry 2032 (class 0 OID 32836)
+-- Dependencies: 176
+-- Data for Name: distance; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY distance (arrival_station, departure_station, distance) FROM stdin;
+105	104	158
+104	103	87
+103	102	252
+102	101	14
+\.
+
+
+--
+-- TOC entry 2026 (class 0 OID 32776)
+-- Dependencies: 170
+-- Data for Name: reservation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY reservation (reservation_id, email, first_name, last_name, wagon_id, seat, origin_station, destination_station, travel_date, expiration_data) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2033 (class 0 OID 32851)
+-- Dependencies: 177
+-- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY schedule (schedule_id, schedule_type) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2031 (class 0 OID 32819)
+-- Dependencies: 175
+-- Data for Name: station; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY station (station_id, station_name) FROM stdin;
+101	Київ Пасажирський
+102	Дарниця
+103	Миргород
+104	Полтава Київська
+105	Харків
+\.
+
+
+--
+-- TOC entry 2029 (class 0 OID 32801)
+-- Dependencies: 173
+-- Data for Name: train; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY train (train_id, train_num, type) FROM stdin;
+721O	721	ІнтерСіті
+\.
+
+
+--
+-- TOC entry 2034 (class 0 OID 32871)
+-- Dependencies: 178
+-- Data for Name: train_schedule; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY train_schedule (train_id, schedule_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2030 (class 0 OID 32814)
+-- Dependencies: 174
+-- Data for Name: train_station; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY train_station (train_id, station_id, departure_time, arrival_time, station_number) FROM stdin;
+721O	105	18:39:00	18:39:00	1
+721O	104	20:15:00	20:13:00	2
+721O	103	21:07:00	21:05:00	3
+721O	102	23:03:00	23:02:00	4
+721O	101	23:16:00	23:16:00	5
+\.
+
+
+--
+-- TOC entry 2027 (class 0 OID 32781)
+-- Dependencies: 171
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "user" (email, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2028 (class 0 OID 32791)
+-- Dependencies: 172
+-- Data for Name: wagon; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY wagon (wagon_id, train_id, wagon_num, seats_num, wagon_type) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1895 (class 2606 OID 32785)
+-- Name: email; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT email PRIMARY KEY (email);
+
+
+--
+-- TOC entry 1905 (class 2606 OID 32840)
+-- Name: from_to; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY distance
+    ADD CONSTRAINT from_to PRIMARY KEY (arrival_station, departure_station);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 32780)
+-- Name: reservation_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY reservation
+    ADD CONSTRAINT reservation_id PRIMARY KEY (reservation_id);
+
+
+--
+-- TOC entry 1907 (class 2606 OID 32855)
+-- Name: schedule_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY schedule
+    ADD CONSTRAINT schedule_id PRIMARY KEY (schedule_id);
+
+
+--
+-- TOC entry 1903 (class 2606 OID 32823)
+-- Name: station_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY station
+    ADD CONSTRAINT station_id PRIMARY KEY (station_id);
+
+
+--
+-- TOC entry 1899 (class 2606 OID 32808)
+-- Name: train_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY train
+    ADD CONSTRAINT train_id PRIMARY KEY (train_id);
+
+
+--
+-- TOC entry 1909 (class 2606 OID 32875)
+-- Name: train_schedule_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY train_schedule
+    ADD CONSTRAINT train_schedule_pk PRIMARY KEY (train_id, schedule_id);
+
+
+--
+-- TOC entry 1901 (class 2606 OID 32825)
+-- Name: train_station_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY train_station
+    ADD CONSTRAINT train_station_pk PRIMARY KEY (train_id, station_id);
+
+
+--
+-- TOC entry 1897 (class 2606 OID 32795)
+-- Name: wagon_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY wagon
+    ADD CONSTRAINT wagon_id PRIMARY KEY (wagon_id);
+
+
+--
+-- TOC entry 1915 (class 2606 OID 32841)
+-- Name: arrival_station; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distance
+    ADD CONSTRAINT arrival_station FOREIGN KEY (arrival_station) REFERENCES station(station_id);
+
+
+--
+-- TOC entry 1916 (class 2606 OID 32846)
+-- Name: departure_station; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distance
+    ADD CONSTRAINT departure_station FOREIGN KEY (departure_station) REFERENCES station(station_id);
+
+
+--
+-- TOC entry 1910 (class 2606 OID 32786)
+-- Name: email; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY reservation
+    ADD CONSTRAINT email FOREIGN KEY (email) REFERENCES "user"(email);
+
+
+--
+-- TOC entry 1918 (class 2606 OID 32881)
+-- Name: schedule_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY train_schedule
+    ADD CONSTRAINT schedule_id FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id);
+
+
+--
+-- TOC entry 1914 (class 2606 OID 32831)
+-- Name: station_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY train_station
+    ADD CONSTRAINT station_id FOREIGN KEY (station_id) REFERENCES station(station_id);
+
+
+--
+-- TOC entry 1912 (class 2606 OID 32809)
+-- Name: train_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wagon
+    ADD CONSTRAINT train_id FOREIGN KEY (train_id) REFERENCES train(train_id);
+
+
+--
+-- TOC entry 1913 (class 2606 OID 32826)
+-- Name: train_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY train_station
+    ADD CONSTRAINT train_id FOREIGN KEY (train_id) REFERENCES train(train_id);
+
+
+--
+-- TOC entry 1917 (class 2606 OID 32876)
+-- Name: train_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY train_schedule
+    ADD CONSTRAINT train_id FOREIGN KEY (train_id) REFERENCES train(train_id);
+
+
+--
+-- TOC entry 1911 (class 2606 OID 32796)
+-- Name: wagon_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY reservation
+    ADD CONSTRAINT wagon_id FOREIGN KEY (wagon_id) REFERENCES wagon(wagon_id);
+
+
+--
+-- TOC entry 2041 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-12-08 22:56:56 EET
+
+--
+-- PostgreSQL database dump complete
+--
+
