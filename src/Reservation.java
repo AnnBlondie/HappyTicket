@@ -17,7 +17,7 @@ public class Reservation extends Customer{
 
 	public Reservation(Customer customer, int trainNumber, Date reservationDate,
 			int reservationPlace, String reservatinName) {
-		super(customer.getCustomerSocialGroup());
+		super(customer.getEmail());
 		this.trainNumber = trainNumber;
 		this.reservationDate = reservationDate;
 		this.reservationPlace = reservationPlace;
@@ -74,8 +74,8 @@ public class Reservation extends Customer{
 
 	@Override
 	public String toString() {
-		return " [reservatinName=" + reservatinName + ", " +
-				"socialGroup="+super.getCustomerSocialGroup()+", trainNumber=" + trainNumber + ", reservationDate="
+		return "customerEmail="+super.getEmail()+" [reservatinName=" + reservatinName +
+				", trainNumber=" + trainNumber + ", reservationDate="
 				+ reservationDate.toString() + ", reservationPlace=" + reservationPlace
 				+ ", ticketPrice="+ticketPrice+"]";
 	}

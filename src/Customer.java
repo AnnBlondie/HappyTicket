@@ -2,20 +2,20 @@ import java.util.Date;
 
 
 public class Customer {
-	private String customerSocialGroup;//rename to tariff 
+	private String email;
 
 	
-	public Customer(String customerSocialGroup) {
-		this.customerSocialGroup = customerSocialGroup;
+	public Customer(String email) {
+		this.email = email;
 	}
 
-	public String getCustomerSocialGroup() {
-		return customerSocialGroup;
+	public String getEmail() {
+		return email;
 	}
 
 
-	public void setCustomerSocialGroup(String customerSocialGroup) {
-		this.customerSocialGroup = customerSocialGroup;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
@@ -23,11 +23,6 @@ public class Customer {
 			int reservationPlace, String reservatinName){
 		Reservation r = new Reservation(customer, trainNumber, reservationDate, reservationPlace, reservatinName);
 		return r;
-	}
-	
-	public Ticket createTicket(Reservation r){
-		Ticket t = new Ticket(r);
-		return t;
 	}
 
 }
