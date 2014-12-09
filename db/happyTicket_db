@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2014-12-08 22:56:56 EET
+-- Started on 2014-12-09 18:51:25 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -37,6 +37,19 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- TOC entry 171 (class 1259 OID 32781)
+-- Name: customer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE customer (
+    email character varying(30) NOT NULL,
+    name character varying(10)
+);
+
+
+ALTER TABLE public.customer OWNER TO postgres;
+
+--
 -- TOC entry 176 (class 1259 OID 32836)
 -- Name: distance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -44,7 +57,7 @@ SET default_with_oids = false;
 CREATE TABLE distance (
     arrival_station integer NOT NULL,
     departure_station integer NOT NULL,
-    distance integer
+    distance_km integer
 );
 
 
@@ -104,7 +117,6 @@ ALTER TABLE public.station OWNER TO postgres;
 
 CREATE TABLE train (
     train_id character varying NOT NULL,
-    train_num integer,
     type character varying(10)
 );
 
@@ -141,19 +153,6 @@ CREATE TABLE train_station (
 ALTER TABLE public.train_station OWNER TO postgres;
 
 --
--- TOC entry 171 (class 1259 OID 32781)
--- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE "user" (
-    email character varying(30) NOT NULL,
-    name character varying(10)
-);
-
-
-ALTER TABLE public."user" OWNER TO postgres;
-
---
 -- TOC entry 172 (class 1259 OID 32791)
 -- Name: wagon; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -170,12 +169,22 @@ CREATE TABLE wagon (
 ALTER TABLE public.wagon OWNER TO postgres;
 
 --
+-- TOC entry 2027 (class 0 OID 32781)
+-- Dependencies: 171
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY customer (email, name) FROM stdin;
+\.
+
+
+--
 -- TOC entry 2032 (class 0 OID 32836)
 -- Dependencies: 176
 -- Data for Name: distance; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY distance (arrival_station, departure_station, distance) FROM stdin;
+COPY distance (arrival_station, departure_station, distance_km) FROM stdin;
 105	104	158
 104	103	87
 103	102	252
@@ -224,8 +233,8 @@ COPY station (station_id, station_name) FROM stdin;
 -- Data for Name: train; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY train (train_id, train_num, type) FROM stdin;
-721O	721	ІнтерСіті
+COPY train (train_id, type) FROM stdin;
+721O	ІнтерСіті
 \.
 
 
@@ -255,16 +264,6 @@ COPY train_station (train_id, station_id, departure_time, arrival_time, station_
 
 
 --
--- TOC entry 2027 (class 0 OID 32781)
--- Dependencies: 171
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "user" (email, name) FROM stdin;
-\.
-
-
---
 -- TOC entry 2028 (class 0 OID 32791)
 -- Dependencies: 172
 -- Data for Name: wagon; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -279,7 +278,7 @@ COPY wagon (wagon_id, train_id, wagon_num, seats_num, wagon_type) FROM stdin;
 -- Name: email; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY "user"
+ALTER TABLE ONLY customer
     ADD CONSTRAINT email PRIMARY KEY (email);
 
 
@@ -374,12 +373,12 @@ ALTER TABLE ONLY distance
 
 
 --
--- TOC entry 1910 (class 2606 OID 32786)
+-- TOC entry 1911 (class 2606 OID 40975)
 -- Name: email; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY reservation
-    ADD CONSTRAINT email FOREIGN KEY (email) REFERENCES "user"(email);
+    ADD CONSTRAINT email FOREIGN KEY (email) REFERENCES customer(email);
 
 
 --
@@ -428,7 +427,7 @@ ALTER TABLE ONLY train_schedule
 
 
 --
--- TOC entry 1911 (class 2606 OID 32796)
+-- TOC entry 1910 (class 2606 OID 32796)
 -- Name: wagon_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -448,7 +447,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-12-08 22:56:56 EET
+-- Completed on 2014-12-09 18:51:25 EET
 
 --
 -- PostgreSQL database dump complete
