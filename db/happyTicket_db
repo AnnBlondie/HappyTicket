@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2014-12-09 18:51:25 EET
+-- Started on 2014-12-14 16:29:09 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -235,6 +235,7 @@ COPY station (station_id, station_name) FROM stdin;
 
 COPY train (train_id, type) FROM stdin;
 721O	ІнтерСіті
+111	test
 \.
 
 
@@ -447,7 +448,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-12-09 18:51:25 EET
+-- Completed on 2014-12-14 16:29:09 EET
 
 --
 -- PostgreSQL database dump complete
