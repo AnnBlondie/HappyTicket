@@ -10,36 +10,14 @@ import javax.swing.JScrollPane;
 
 public class FoundRoutes {
 
-	private JFrame frame;
+	JFrame frame;
 	private JScrollPane scrollPane;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FoundRoutes window = new FoundRoutes();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public FoundRoutes() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 845, 569);

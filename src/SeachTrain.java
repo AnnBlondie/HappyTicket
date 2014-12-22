@@ -22,43 +22,14 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-
 public class SeachTrain {
 
-	private JFrame frame;
+	JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SeachTrain window = new SeachTrain();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public SeachTrain() {
 		initialize();
 	}
 
-
-
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-
-	
-	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 420);
