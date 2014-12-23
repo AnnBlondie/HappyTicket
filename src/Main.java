@@ -12,7 +12,7 @@ public class Main {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						SeachTrain window = new SeachTrain();
+						SearchTrain window = new SearchTrain();
 						window.frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -49,15 +49,26 @@ public class Main {
 			
 			//4. fourth GUI - fulfilling passanger's personal data, creating reservation
 			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						VerificationTicket window = new VerificationTicket();
-						window.frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			public void run() {
+				try {
+					VerificationTicket window = new VerificationTicket();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			});	
+			}
+		});
+
+                        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserData window = new UserData();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 			
 			
 			//database connection
