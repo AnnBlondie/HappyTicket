@@ -3,10 +3,11 @@ import java.awt.EventQueue;
 
 public class Main {
 		public static void main(String[] args){
-			DataBase db = new DataBase("postgres", "12345", "jdbc:postgresql://localhost:5432/HappyTickets" );
-			db.selectAllTrains();
-			db.selectTrainFromTo("Львів","Одеса");
-			db.selectTrainFromTo("Київ Пасажирський","Харків");
+			//DataBase db = new DataBase("postgres", "12345", "jdbc:postgresql://localhost:5432/HappyTickets" );
+			//db.selectAllTrains();
+			//db.selectTrainFromTo("Львів","Одеса");
+			//db.selectTrainFromTo("Київ Пасажирський","Харків");
+			//db.closeDB();
 
 				
             //1. first GUI - basic parameters search - from-to, date
@@ -14,8 +15,7 @@ public class Main {
 				public void run() {
 					try {
 						SearchTrain window = new SearchTrain();
-						window.setVisible(true);
-						//System.out.println(window.getSourseStation());
+						window.setVisible(true);		
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

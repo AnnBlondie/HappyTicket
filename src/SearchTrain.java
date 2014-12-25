@@ -51,14 +51,13 @@ public class SearchTrain {
 		lblNewLabel_1.setBounds(46, 202, 51, 20);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Київ", "Дарниця", "Миргород", "Полтава Київська", "Харків-Пас"}));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBox.setBounds(96, 145, 231, 26);
-		setSourseStation((String)comboBox.getSelectedItem());//? does not do what I suppose(
 		frame.getContentPane().add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		final JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Харків-Пас", "Полтава Київська", "Миргород", "Дарниця", "Київ"}));
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBox_1.setBounds(96, 200, 231, 26);
@@ -116,7 +115,8 @@ public class SearchTrain {
 		JButton btnNewButton = new JButton("Пошук поїздів");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Обробка запиту. Зачекайте будь ласка");
+				JOptionPane.showMessageDialog(null, "Шукаємо для Вас поїзд від станції "
+			+(String)comboBox.getSelectedItem()+" до станції "+(String)comboBox_1.getSelectedItem()+". Зачекайте будь ласка");
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
@@ -127,7 +127,9 @@ public class SearchTrain {
 		JLabel label_1 = new JLabel("Пошук поїздів");
 		label_1.setFont(new Font("Trebuchet MS", Font.BOLD, 28));
 		label_1.setBounds(371, 16, 197, 52);
+		
 		frame.getContentPane().add(label_1);
+		setSourseStation((String)comboBox.getSelectedItem());
 	}
 	
 	public String getSourseStation() {

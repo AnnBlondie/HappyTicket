@@ -8,27 +8,19 @@ public class DataBase {
 	private String userName;
 	private String password;
 	private String url;
+	private Connection db = null;
+
 	
 	public DataBase(String username, String password, String url){
 		setUserName(username);
 		setPassword(password);
 		setUrl(url);
-		Connection db = null;
 		try {
 			db = DriverManager.getConnection(url, username, password);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}   
-		finally{//close connection  
-			try {
-				if(db != null)
-					db.close();
-			} 
-		catch (SQLException e) {// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	}
 	
 	public String getUserName() {
@@ -56,9 +48,7 @@ public class DataBase {
 	}
 
 	public void selectAllTrains(){
-		Connection db = null;
 		try {
-			db = DriverManager.getConnection(url, userName, password);
 			Statement st = db.createStatement();
 			ResultSet rs = st.executeQuery("select * from train");
 			while(rs.next()){
@@ -71,21 +61,10 @@ public class DataBase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}   
-		finally{//close connection  
-			try {
-				if(db != null)
-					db.close();
-			} 
-		catch (SQLException e) {// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-		}
 	}
 	
 	public void selectTrainFromTo(String stationFrom, String stationTo){
-		Connection db = null;
 		try {
-			db = DriverManager.getConnection(url, userName, password);
 			Statement st = db.createStatement();
 			String s = "SELECT train.train_id, F.arrival_time as A1,F.departure_time as D1,T.arrival_time as A2,T.departure_time as D2  "+
 					"FROM train, train_station F, train_station T "+
@@ -106,14 +85,17 @@ public class DataBase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}   
-		finally{//close connection  
-			try {
-				if(db != null)
-					db.close();
-			} 
+	}
+	
+	
+	public void closeDB(){
+		try {
+			if(db != null)
+			db.close();
+		} 
 		catch (SQLException e) {// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
+		e.printStackTrace();
 		}
 	}
+
 }
