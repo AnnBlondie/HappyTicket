@@ -10,12 +10,16 @@ import javax.swing.JScrollPane;
 
 public class FoundRoutes {
 
-	JFrame frame;
+	private JFrame frame;
 	private JScrollPane scrollPane;
 	private JTable table;
 
 	public FoundRoutes() {
 		initialize();
+	}
+	
+	public void setVisible(boolean b){//to show frame without making it public
+		frame.setVisible(b);
 	}
 
 	private void initialize() {

@@ -19,13 +19,17 @@ import javax.swing.DefaultComboBoxModel;
 
 public class SeatSelection {
 
-	JFrame frame;
+	private JFrame frame;
 	private final JLabel label = new JLabel("\u041F\u043E\u0457\u0437\u0434");
 
 	public SeatSelection() {
 		initialize();
 	}
 
+	public void setVisible(boolean b){//to show frame without making it public
+		frame.setVisible(b);
+	}
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 638, 524);

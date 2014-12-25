@@ -26,7 +26,11 @@ public class VerificationTicket {
 	public VerificationTicket() {
 		initialize();
 	}
-
+	
+	public void setVisible(boolean b){ //to show frame without making it public
+		frame.setVisible(b);
+	}
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 948, 454);

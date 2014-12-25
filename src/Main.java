@@ -1,32 +1,34 @@
 ﻿//import java.util.;
 import java.awt.EventQueue;
-import java.sql.*;
-import org.postgresql.Driver;
-
 
 public class Main {
 		public static void main(String[] args){
-			//0. e-mail and login input - allow administrator to insert train and trace 
-			
-			//1. first GUI - basic parameters search - from-to, date
+			DataBase db = new DataBase("postgres", "12345", "jdbc:postgresql://localhost:5432/HappyTickets" );
+			db.selectAllTrains();
+			db.selectTrainFromTo("Львів","Одеса");
+			db.selectTrainFromTo("Київ Пасажирський","Харків");
+
+				
+            //1. first GUI - basic parameters search - from-to, date
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						SearchTrain window = new SearchTrain();
-						window.frame.setVisible(true);
+						window.setVisible(true);
+						//System.out.println(window.getSourseStation());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 			});
-			
-			
+		
+			/*
 			//2. second GUI - results of search and possibility to peek train
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						FoundRoutes window = new FoundRoutes();
-						window.frame.setVisible(true);
+						window.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -39,7 +41,7 @@ public class Main {
 				public void run() {
 					try {
 						SeatSelection window = new SeatSelection();
-						window.frame.setVisible(true);
+						window.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -49,56 +51,29 @@ public class Main {
 			
 			//4. fourth GUI - fulfilling passanger's personal data, creating reservation
 			EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VerificationTicket window = new VerificationTicket();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				public void run() {
+					try {
+						VerificationTicket window = new VerificationTicket();
+						window.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+			
+			//5. e-mail input - sending reservation data to user 
+            EventQueue.invokeLater(new Runnable() {
+            	public void run() {
+            		try {
+            			UserData window = new UserData();
+            			window.setVisible(true);
+            		} catch (Exception e) {
+            			e.printStackTrace();
+            		}
+            	}
+            });
+			
 
-                        EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserData window = new UserData();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-			
-			
-			//database connection
-			String username = "postgres";
-			String password = "12345";
-			String url = "jdbc:postgresql://localhost:5432/HappyTickets"; 
-				  
-			Connection db = null;
-			try {
-				db = DriverManager.getConnection(url, username, password);
-				Statement st = db.createStatement();
-				ResultSet rs = st.executeQuery("select * from train");
-				while(rs.next()){
-					System.out.print(rs.getString("train_id"));
-					System.out.print(" ");
-					System.out.print(rs.getString("type"));
-					System.out.println();
-				}
-			} 
-			catch (Exception e) {
-				e.printStackTrace();
-			}   
-			finally{//close connection  
-				try {
-					if(db != null)
-						db.close();
-				} 
-			catch (SQLException e) {// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			*/
 	}
 }

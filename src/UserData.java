@@ -17,6 +17,9 @@ public class UserData {
 		initialize();
 	}
 
+	public void setVisible(boolean b){//to show frame without making it public
+		frame.setVisible(b);
+	}
 
 	private void initialize() {
 		frame = new JFrame();
