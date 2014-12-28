@@ -1,7 +1,20 @@
-﻿//import java.util.;
-import java.awt.EventQueue;
+﻿import java.awt.EventQueue;
+/*
+ * Каким образом можно организовать управление формами ГУИ через main? Пока получается что 
+ * формы вызываются каскадно каждая следущая через actionListener предыдущей. Есть ли метод
+ * их вызывать последовательно, учитывая что каждая следущая форма инициализируется 
+ * результатами с предыдущей (сохранить результат в переменную класса через getSelectedItem() 
+ * не получается)?
+ * 
+ * Нужно ли в каждом методе класса работы с базой данных DataBase проводить подключение и 
+ * отключение базы, или можно оставить в таком виде (связь открывается конструктором, в конце
+ * вызывается метод закрытия связи close())?
+ * 
+ */
+
 
 public class Main {
+
 		public static void main(String[] args){
 			//DataBase db = new DataBase("postgres", "12345", "jdbc:postgresql://localhost:5432/HappyTickets" );
 			//db.selectAllTrains();
@@ -21,8 +34,7 @@ public class Main {
 					}
 				}
 			});
-		
-			/*
+		/*
 			//2. second GUI - results of search and possibility to peek train
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {

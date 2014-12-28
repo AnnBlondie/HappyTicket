@@ -2,7 +2,6 @@ import java.sql.*;
 import org.postgresql.Driver;
 import java.awt.EventQueue;
 
-
 public class DataBase {
 
 	private String userName;

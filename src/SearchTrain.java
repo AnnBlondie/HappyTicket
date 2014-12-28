@@ -115,9 +115,16 @@ public class SearchTrain {
 		JButton btnNewButton = new JButton("Пошук поїздів");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Шукаємо для Вас поїзд від станції "
-			+(String)comboBox.getSelectedItem()+" до станції "+(String)comboBox_1.getSelectedItem()+". Зачекайте будь ласка");
-				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							FoundRoutes window = new FoundRoutes();
+							window.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
