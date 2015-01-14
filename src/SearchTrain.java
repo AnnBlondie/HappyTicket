@@ -27,6 +27,7 @@ public class SearchTrain {
 
 	private JFrame frame;
 	private String sourseStation;
+	private JButton btnNewButton = new JButton("Пошук поїздів");
 
 	public SearchTrain() {
 		initialize();
@@ -112,21 +113,7 @@ public class SearchTrain {
 		comboBox_5.setBounds(623, 200, 204, 26);
 		frame.getContentPane().add(comboBox_5);
 		
-		JButton btnNewButton = new JButton("Пошук поїздів");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							FoundRoutes window = new FoundRoutes();
-							window.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
+	
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.setBounds(658, 265, 169, 29);
 		frame.getContentPane().add(btnNewButton);
@@ -137,6 +124,10 @@ public class SearchTrain {
 		
 		frame.getContentPane().add(label_1);
 		setSourseStation((String)comboBox.getSelectedItem());
+	}
+	
+	void addSearchTrainListener(ActionListener listenForSearchTrainButton){
+		btnNewButton.addActionListener(listenForSearchTrainButton);
 	}
 	
 	public String getSourseStation() {

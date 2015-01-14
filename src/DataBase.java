@@ -1,6 +1,8 @@
 import java.sql.*;
 import org.postgresql.Driver;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DataBase {
 
@@ -8,8 +10,7 @@ public class DataBase {
 	private String password;
 	private String url;
 	private Connection db = null;
-
-	
+		
 	public DataBase(String username, String password, String url){
 		setUserName(username);
 		setPassword(password);
@@ -21,6 +22,7 @@ public class DataBase {
 			e.printStackTrace();
 		}   
 	}
+	
 	
 	public String getUserName() {
 		return userName;
@@ -45,7 +47,7 @@ public class DataBase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
+/* illustrative method
 	public void selectAllTrains(){
 		try {
 			Statement st = db.createStatement();
@@ -61,7 +63,9 @@ public class DataBase {
 			e.printStackTrace();
 		}   
 	}
+	*/
 	
+	//to create data for second view - need addition(to show free seats number for every train)
 	public void selectTrainFromTo(String stationFrom, String stationTo){
 		try {
 			Statement st = db.createStatement();
@@ -86,6 +90,13 @@ public class DataBase {
 		}   
 	}
 	
+	//to create data for third view - no need
+	
+	//to create data for forth view - select free seat for exact train
+	
+	//to create data for fifth view - no need 
+	
+	//final fulfilling user data - insert in dataBase in Customer and Reservation
 	
 	public void closeDB(){
 		try {
