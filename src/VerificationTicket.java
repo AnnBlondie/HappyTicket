@@ -1,4 +1,4 @@
-﻿import java.awt.EventQueue;
+﻿imimport java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -39,7 +39,7 @@ public class VerificationTicket {
 		
 		JLabel label = new JLabel("Кошик");
 		label.setFont(new Font("Tahoma", Font.BOLD, 26));
-		label.setBounds(45, 27, 111, 44);
+		label.setBounds(45, 27, 342, 44);
 		frame.getContentPane().add(label);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -74,7 +74,7 @@ public class VerificationTicket {
 		
 		JButton btnNewButton = new JButton("17,00 ГРН ОПЛАТИТИ");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 19));
-		btnNewButton.setBounds(573, 279, 263, 44);
+		btnNewButton.setBounds(523, 274, 350, 44);
 		frame.getContentPane().add(btnNewButton);
 	}
 }

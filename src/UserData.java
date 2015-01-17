@@ -1,5 +1,8 @@
 import java.awt.EventQueue;
 
+import java.awt.ScrollPane;
+import java.awt.BorderLayout;
+import java.awt.Panel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,12 +32,12 @@ public class UserData {
 		
 		JLabel label = new JLabel("\u0412\u0432\u0435\u0434\u0456\u0442\u044C \u0412\u0430\u0448\u0456 \u0414\u0430\u043D\u0456");
 		label.setFont(new Font("Tahoma", Font.BOLD, 27));
-		label.setBounds(123, 16, 324, 50);
+		label.setBounds(37, 16, 455, 50);
 		frame.getContentPane().add(label);
 		
 		JLabel lblNewLabel = new JLabel("E-mail:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(53, 95, 62, 50);
+		lblNewLabel.setBounds(53, 95, 85, 50);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JTextPane textPane = new JTextPane();
@@ -47,7 +50,7 @@ public class UserData {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(174, 181, 157, 38);
+		btnNewButton.setBounds(142, 181, 228, 38);
 		frame.getContentPane().add(btnNewButton);
 	}
 }
