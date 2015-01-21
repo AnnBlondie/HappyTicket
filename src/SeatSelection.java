@@ -20,7 +20,13 @@ import javax.swing.DefaultComboBoxModel;
 public class SeatSelection {
 
 	private JFrame frame;
-	private final JLabel label = new JLabel("\u041F\u043E\u0457\u0437\u0434");
+	private final JLabel label = new JLabel("Поїзд");
+	JComboBox<String> wagonBox = new JComboBox<String>();
+	JComboBox<String> seatBox = new JComboBox<String>();
+	JTextArea surname = new JTextArea();
+	JTextArea name = new JTextArea();
+	JButton reserveButton = new JButton("Зарезервувати");
+	JButton canselButton = new JButton("Відмінити");
 
 	public SeatSelection() {
 		initialize();
@@ -29,34 +35,8 @@ public class SeatSelection {
 	public void setVisible(boolean b){//to show frame without making it public
 		frame.setVisible(b);
 	}
-	
+
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 638, 524);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		label.setFont(new Font("Tahoma", Font.BOLD, 25));
-		label.setBounds(247, 59, 81, 41);
-		frame.getContentPane().add(label);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(333, 59, 99, 36);
-		frame.getContentPane().add(textArea);
-		
-		JLabel lblNewLabel = new JLabel("\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0432\u0430\u0433\u043E\u043D");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(40, 137, 121, 50);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		comboBox.setBounds(164, 150, 145, 26);
-		frame.getContentPane().add(comboBox);
-		
-		JLabel lblNewLabel_1 = new JLabel("\u041C\u0456\u0441\u0446\u0435");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 705, 524);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,67 +50,60 @@ private void initialize() {
 		textArea.setBounds(333, 59, 99, 36);
 		frame.getContentPane().add(textArea);
 		
-		JLabel lblNewLabel = new JLabel("\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0432\u0430\u0433\u043E\u043D");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(40, 137, 177, 50);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel wagonLabel = new JLabel("Оберіть вагон");
+		wagonLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		wagonLabel.setBounds(40, 137, 177, 50);
+		frame.getContentPane().add(wagonLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		comboBox.setBounds(240, 150, 102, 26);
-		frame.getContentPane().add(comboBox);
+		wagonBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
+		wagonBox.setBounds(240, 150, 102, 26);
+		frame.getContentPane().add(wagonBox);
 		
-		JLabel lblNewLabel_1 = new JLabel("\u041C\u0456\u0441\u0446\u0435");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(411, 137, 126, 50);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel seatLabel = new JLabel("Місце");
+		seatLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		seatLabel.setBounds(411, 137, 126, 50);
+		frame.getContentPane().add(seatLabel);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		comboBox_1.setBounds(552, 150, 87, 26);
-		frame.getContentPane().add(comboBox_1);
+		seatBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
+		seatBox.setBounds(552, 150, 87, 26);
+		frame.getContentPane().add(seatBox);
 		
-		JLabel lblNewLabel_2 = new JLabel("\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(66, 209, 140, 50);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel surnameLabel = new JLabel("Прізвище");
+		surnameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		surnameLabel.setBounds(66, 209, 140, 50);
+		frame.getContentPane().add(surnameLabel);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(209, 225, 133, 22);
-		frame.getContentPane().add(textArea_1);
+		surname.setBounds(209, 225, 133, 22);
+		frame.getContentPane().add(surname);
 		
-		JLabel lblNewLabel_3 = new JLabel("\u0406\u043C'\u044F");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_3.setBounds(421, 209, 68, 50);
-		frame.getContentPane().add(lblNewLabel_3);
+		JLabel nameLabel = new JLabel("Ім'я");
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		nameLabel.setBounds(421, 209, 68, 50);
+		frame.getContentPane().add(nameLabel);
 		
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBounds(524, 225, 115, 22);
-		frame.getContentPane().add(textArea_2);
+		name.setBounds(524, 225, 115, 22);
+		frame.getContentPane().add(name);
 		
-		JLabel lblNewLabel_4 = new JLabel("\u0426\u0456\u043D\u0430: 17,00 \u0413\u0420\u041D");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_4.setBounds(110, 275, 286, 50);
-		frame.getContentPane().add(lblNewLabel_4);
+		JLabel priceLabel = new JLabel("Ціна: 17,00 грн");
+		priceLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		priceLabel.setBounds(110, 275, 286, 50);
+		frame.getContentPane().add(priceLabel);
 		
-		JButton btnNewButton = new JButton("\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0443\u0432\u0430\u0442\u0438");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, "Search for train. Please wait..");
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(53, 370, 256, 41);
-		frame.getContentPane().add(btnNewButton);
+		reserveButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		reserveButton.setBounds(53, 370, 256, 41);
+		frame.getContentPane().add(reserveButton);
 		
-		JButton btnNewButton_1 = new JButton("\u0412\u0456\u0434\u043C\u0456\u043D\u0438\u0442\u0438");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_1.setBounds(378, 370, 261, 41);
-		frame.getContentPane().add(btnNewButton_1);
+		canselButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		canselButton.setBounds(378, 370, 261, 41);
+		frame.getContentPane().add(canselButton);
+	}
+	
+	void addReserveSeatSelectionListener(ActionListener listenForResearveSeatButton){
+		reserveButton.addActionListener(listenForResearveSeatButton);
+	}
+	
+	void addCanselSeatSelectionListener(ActionListener listenCanselSeatSelectionButton){
+		canselButton.addActionListener(listenCanselSeatSelectionButton);
 	}
 }
 

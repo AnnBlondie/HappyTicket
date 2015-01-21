@@ -47,7 +47,8 @@ public class DataBase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-/* illustrative method
+	
+	/* illustrative method
 	public void selectAllTrains(){
 		try {
 			Statement st = db.createStatement();
@@ -66,7 +67,8 @@ public class DataBase {
 	*/
 	
 	//to create data for second view - need addition(to show free seats number for every train)
-	public void selectTrainFromTo(String stationFrom, String stationTo){
+	public String[][] selectTrainFromTo(String stationFrom, String stationTo){
+		String[][] result = new String[6][6];
 		try {
 			Statement st = db.createStatement();
 			String s = "SELECT train.train_id, F.arrival_time as A1,F.departure_time as D1,T.arrival_time as A2,T.departure_time as D2  "+
@@ -78,16 +80,26 @@ public class DataBase {
 					"AND T.station_id IN "+
 					"(SELECT station_id FROM station WHERE station_name='"+stationTo+"');";
 			ResultSet rs = st.executeQuery(s);
+			int i=0;
 			while(rs.next()){
 				System.out.print("Потяг номер ");
 				System.out.println(rs.getString("train_id")+":\n на станцїї "+stationFrom+" "+rs.getString("A1")+
 						" "+rs.getString("D1")+";\n на станцїї "+stationTo+" "+rs.getString("A2")+
 						" "+rs.getString("D2")+" ");
+				
+				result[i][0]= rs.getString("train_id");
+				result[i][1]= stationFrom+"/"+stationTo;
+				result[i][2]= "";
+				result[i][3]= rs.getString("D1")+"/"+rs.getString("A2");
+				result[i][4]= "";
+				result[i][5]= "";
+				i++;
 			}
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}   
+		return result;
 	}
 	
 	//to create data for third view - no need
@@ -96,7 +108,7 @@ public class DataBase {
 	
 	//to create data for fifth view - no need 
 	
-	//final fulfilling user data - insert in dataBase in Customer and Reservation
+	//final fulfilling user data - insert in dataBase in Customer and Reservation, closing connection
 	
 	public void closeDB(){
 		try {

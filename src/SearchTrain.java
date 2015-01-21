@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,8 +27,11 @@ import javax.swing.UIManager;
 public class SearchTrain {
 
 	private JFrame frame;
-	private String sourseStation;
-	private JButton btnNewButton = new JButton("Пошук поїздів");
+	final JComboBox<String> sourseStation = new JComboBox<String>();
+	final JComboBox<String> destinationStation = new JComboBox<String>();
+	final JComboBox<String> passengerAge = new JComboBox<String>();
+	final JComboBox<String> passengerNuber = new JComboBox<String>();
+	private JButton searchTrainButton = new JButton("Пошук поїздів");
 
 	public SearchTrain() {
 		initialize();
@@ -42,70 +46,75 @@ public class SearchTrain {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Звідки");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(29, 148, 103, 20);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel searchTrainFrameNameLabel = new JLabel("Пошук поїздів");
+		searchTrainFrameNameLabel.setFont(new Font("Tahoma", Font.BOLD, 26));
+		searchTrainFrameNameLabel.setBounds(283, 16, 486, 52);
+		frame.getContentPane().add(searchTrainFrameNameLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Куди");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(29, 203, 92, 20);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel fromLabel = new JLabel("Звідки");
+		fromLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		fromLabel.setBounds(29, 148, 103, 20);
+		frame.getContentPane().add(fromLabel);
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Київ", "Дарниця", "Миргород", "Полтава Київська", "Харків-Пас"}));
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox.setBounds(139, 144, 231, 26);
-		frame.getContentPane().add(comboBox);
+		sourseStation.setModel(new DefaultComboBoxModel<String>(new String[] {"Назва станції", "Київ Пасажирський", "Дарниця", "Миргород", "Полтава Київська", "Харків-Пас"}));
+		sourseStation.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		sourseStation.setBounds(139, 144, 231, 26);
+		frame.getContentPane().add(sourseStation);
 		
-		final JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Харків-Пас", "Полтава Київська", "Миргород", "Дарниця", "Київ"}));
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_1.setBounds(139, 199, 231, 26);
-		frame.getContentPane().add(comboBox_1);
+		JLabel toLabel = new JLabel("Куди");
+		toLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		toLabel.setBounds(29, 203, 92, 20);
+		frame.getContentPane().add(toLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Пасажир");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(29, 269, 109, 20);
-		frame.getContentPane().add(lblNewLabel_2);
+		destinationStation.setModel(new DefaultComboBoxModel<String>(new String[] {"Назва станції", "Харків", "Полтава Київська", "Миргород", "Дарниця", "Київ"}));
+		destinationStation.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		destinationStation.setBounds(139, 199, 231, 26);
+		frame.getContentPane().add(destinationStation);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Дорослий", "Студент", "Дитячий", "Пенсіонер"}));
-		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_2.setBounds(139, 265, 231, 26);
-		frame.getContentPane().add(comboBox_2);
+		JLabel passengerLabel = new JLabel("Пасажир");
+		passengerLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passengerLabel.setBounds(29, 269, 109, 20);
+		frame.getContentPane().add(passengerLabel);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		comboBox_3.setBounds(403, 266, 51, 26);
-		frame.getContentPane().add(comboBox_3);
+		passengerAge.setModel(new DefaultComboBoxModel<String>(new String[] {"Дорослий", "Студент", "Дитячий", "Пенсіонер"}));
+		passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passengerAge.setBounds(139, 265, 231, 26);
+		frame.getContentPane().add(passengerAge);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Квиток в один кінець");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		rdbtnNewRadioButton.setSelected(true);
-		rdbtnNewRadioButton.setBounds(24, 80, 319, 29);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		passengerNuber.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
+		passengerNuber.setBounds(403, 266, 51, 26);
+		frame.getContentPane().add(passengerNuber);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Туди і назад");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		rdbtnNewRadioButton_1.setBounds(368, 80, 231, 29);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		JRadioButton oneWayButton = new JRadioButton("Квиток в один кінець");
+		oneWayButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		oneWayButton.setSelected(true);
+		oneWayButton.setBounds(24, 80, 319, 29);
+		frame.getContentPane().add(oneWayButton);
 		
-		JLabel lblNewLabel_3 = new JLabel("Дата відправлення:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_3.setBounds(457, 147, 257, 20);
-		frame.getContentPane().add(lblNewLabel_3);
+		JRadioButton returnButton = new JRadioButton("Туди і назад");
+		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		returnButton.setBounds(368, 80, 231, 29);
+		frame.getContentPane().add(returnButton);
 		
+		ButtonGroup oneWayReturnButtonGroup = new ButtonGroup();
+		oneWayReturnButtonGroup.add(oneWayButton);
+		oneWayReturnButtonGroup.add(returnButton);
+		
+		JLabel departureDateLabel = new JLabel("Дата відправлення:");
+		departureDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		departureDateLabel.setBounds(457, 147, 257, 20);
+		frame.getContentPane().add(departureDateLabel);
+
 		JComboBox comboBox_4 = new JComboBox();
 		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBox_4.setBounds(710, 144, 270, 26);
 		frame.getContentPane().add(comboBox_4);
 		
-		JLabel label = new JLabel("Дата повернення:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label.setBounds(467, 202, 247, 20);
-		frame.getContentPane().add(label);
+		JLabel arrivalDateLabel = new JLabel("Дата повернення:");
+		arrivalDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		arrivalDateLabel.setBounds(467, 202, 247, 20);
+		frame.getContentPane().add(arrivalDateLabel);
 		
 		JComboBox comboBox_5 = new JComboBox();
 		comboBox_5.setModel(new DefaultComboBoxModel(new String[] {"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
@@ -113,19 +122,12 @@ public class SearchTrain {
 		comboBox_5.setBounds(710, 199, 270, 26);
 		frame.getContentPane().add(comboBox_5);
 		
-		JButton btnNewButton = new JButton("Пошук поїздів");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Search for train. Please wait..");
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(710, 264, 270, 29);
-		frame.getContentPane().add(btnNewButton);
-		
-		JLabel label_1 = new JLabel("Пошук поїздів");
-		label_1.setFont(new Font("Trebuchet MS", Font.BOLD, 26));
-		label_1.setBounds(283, 16, 486, 52);
-		frame.getContentPane().add(label_1);
+		searchTrainButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		searchTrainButton.setBounds(710, 264, 270, 29);
+		frame.getContentPane().add(searchTrainButton);
 	} 
+	
+	void addSearchTrainListener(ActionListener listenForSearchTrainButton){
+		searchTrainButton.addActionListener(listenForSearchTrainButton);
+	}
 }

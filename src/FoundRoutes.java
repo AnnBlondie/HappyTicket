@@ -1,9 +1,13 @@
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 
@@ -13,6 +17,7 @@ public class FoundRoutes {
 	private JFrame frame;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JButton foundRoutesButton = new JButton("Далі");
 
 	public FoundRoutes() {
 		initialize();
@@ -30,7 +35,7 @@ public class FoundRoutes {
 		
 		JLabel lblNewLabel = new JLabel("Знайдені Маршрути");
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 28));
-		lblNewLabel.setBounds(277, 16, 271, 43);
+		lblNewLabel.setBounds(277, 16, 471, 43);
 		frame.getContentPane().add(lblNewLabel);
 		
 		scrollPane = new JScrollPane();
@@ -38,22 +43,10 @@ public class FoundRoutes {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"\u2116 \u043F\u043E\u0457\u0437\u0434\u0430", "\u0417\u0432\u0456\u0434\u043A\u0438 / \u041A\u0443\u0434\u0438", "\u0414\u0430\u0442\u0430", "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044F / \u041F\u0440\u0438\u0431\u0443\u0442\u0442\u044F", "\u0422\u0440\u0438\u0432\u0430\u043B\u0456\u0441\u0442\u044C", "\u0412\u0456\u043B\u044C\u043D\u0438\u0445 \u043C\u0456\u0441\u0446\u044C"
-			}
+			new Object[10][6],
+			new String[] {"№ поїзда", "Звідки / Куди", "Дата", "Відправлення / Прибуття", "Тривалість", "Вільних місць"}
 		) {
 			Class[] columnTypes = new Class[] {
 				String.class, String.class, String.class, String.class, Object.class, Integer.class
@@ -62,11 +55,34 @@ public class FoundRoutes {
 				return columnTypes[columnIndex];
 			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(103);
-		table.getColumnModel().getColumn(1).setPreferredWidth(158);
+		table.getColumnModel().getColumn(0).setPreferredWidth(80);
+		table.getColumnModel().getColumn(1).setPreferredWidth(250);
+		table.getColumnModel().getColumn(2).setPreferredWidth(80);
 		table.getColumnModel().getColumn(3).setPreferredWidth(209);
-		table.getColumnModel().getColumn(4).setPreferredWidth(111);
-		table.getColumnModel().getColumn(5).setPreferredWidth(137);
+		table.getColumnModel().getColumn(4).setPreferredWidth(80);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		
 		scrollPane.setViewportView(table);
+		
+		foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		foundRoutesButton.setBounds(510, 330, 220, 29);
+		frame.getContentPane().add(foundRoutesButton);
+	}
+	
+	public void addRoute(String s[][]){
+		int i=0;
+		while(i<s.length){
+			table.setValueAt(s[i][0], i, 0);
+			table.setValueAt(s[i][1], i, 1);
+			table.setValueAt(s[i][2], i, 2);
+			table.setValueAt(s[i][3], i, 3);
+			table.setValueAt(s[i][4], i, 4);
+			table.setValueAt(s[i][5], i, 5);
+			i++;
+		}
+	}
+	
+	void addFoundRoutesListener(ActionListener listenForFoundRoutesButton){
+		foundRoutesButton.addActionListener(listenForFoundRoutesButton);
 	}
 }

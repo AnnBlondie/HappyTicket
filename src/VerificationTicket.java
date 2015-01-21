@@ -1,4 +1,4 @@
-﻿imimport java.awt.EventQueue;
+﻿import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -14,6 +14,8 @@ import java.awt.Panel;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 
@@ -21,7 +23,7 @@ public class VerificationTicket {
 
 	private JFrame frame;
 	private JTable table;
-
+	final JButton verificationTicketButton = new JButton("17,00 ГРН ОПЛАТИТИ");
 	
 	public VerificationTicket() {
 		initialize();
@@ -56,7 +58,7 @@ public class VerificationTicket {
 				{null, null, null, null},
 			},
 			new String[] {
-				"\u2116", "\u041C\u0456\u0441\u0446\u0435", "\u0426\u0456\u043D\u0430 (\u0433\u0440\u043D. )", ""
+				"№", "Місце", "Ціна (грн. )", ""
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -72,9 +74,12 @@ public class VerificationTicket {
 		table.getColumnModel().getColumn(3).setPreferredWidth(180);
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("17,00 ГРН ОПЛАТИТИ");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 19));
-		btnNewButton.setBounds(523, 274, 350, 44);
-		frame.getContentPane().add(btnNewButton);
+		verificationTicketButton.setFont(new Font("Tahoma", Font.BOLD, 19));
+		verificationTicketButton.setBounds(523, 274, 350, 44);
+		frame.getContentPane().add(verificationTicketButton);
+	}
+	
+	void addVerificationTicketListener(ActionListener listenVerificationTicketButton){
+		verificationTicketButton.addActionListener(listenVerificationTicketButton);
 	}
 }
