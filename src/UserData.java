@@ -25,6 +25,10 @@ public class UserData extends JFrame {
     private Icon s = new ImageIcon(getClass().getResource("S.png"));
     private JButton button2 = new JButton("Відправити деталі бронювання", s);
 
+	public void setVisible(boolean b){//to show frame without making it public
+        this.setVisible(true);
+	}
+    
     //Constructor
     UserData(){
 
@@ -54,7 +58,7 @@ public class UserData extends JFrame {
         c.gridy = 2;
         thePanel.add(button2, c);
         this.add(thePanel);
-        this.setVisible(true);
+
         textField1.requestFocus();
     }
 
