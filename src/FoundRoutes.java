@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -29,21 +30,22 @@ public class FoundRoutes {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 845, 569);
+		frame.setBounds(100, 100, 950, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Знайдені Маршрути");
-		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 28));
+		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 26));
 		lblNewLabel.setBounds(277, 16, 471, 43);
 		frame.getContentPane().add(lblNewLabel);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 120, 763, 188);
+		scrollPane.setBounds(30, 80, 900, 150);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		table.setModel(new DefaultTableModel(
 			new Object[10][6],
 			new String[] {"№ поїзда", "Звідки / Куди", "Дата", "Відправлення / Прибуття", "Тривалість", "Вільних місць"}
@@ -64,8 +66,8 @@ public class FoundRoutes {
 		
 		scrollPane.setViewportView(table);
 		
-		foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		foundRoutesButton.setBounds(510, 330, 220, 29);
+		foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		foundRoutesButton.setBounds(650, 270, 270, 30);
 		frame.getContentPane().add(foundRoutesButton);
 	}
 	

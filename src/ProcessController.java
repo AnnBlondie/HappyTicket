@@ -17,12 +17,10 @@ public class ProcessController {
 		FoundRoutes foundRoutesView = new FoundRoutes();
 		SeatSelection seatSelectionView = new SeatSelection();
 		VerificationTicket verificationTicketView = new VerificationTicket();
-		UserData userDataView = new UserData();
 		this.searchTrainView=searchTrainView;
 		this.foundRoutesView=foundRoutesView;
 		this.seatSelectionView=seatSelectionView;
 		this.verificationTicketView=verificationTicketView;
-		this.userDataView=userDataView;
 		
 		//adding listener to react on first view's button. Initialized with object of specific class
 		this.searchTrainView.addSearchTrainListener(new SearchTrainerListener());
@@ -104,7 +102,9 @@ public class ProcessController {
 		public void actionPerformed(ActionEvent arg0) {
 			try{	
 				verificationTicketView.setVisible(false);
-				userDataView.setVisible(true);
+				UserData userDataView = new UserData();
+				//this.userDataView=userDataView;
+
 			}
 			catch(Exception e){
 				//do nothing

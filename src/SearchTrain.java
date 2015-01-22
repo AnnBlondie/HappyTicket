@@ -42,13 +42,14 @@ public class SearchTrain {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1044, 423);
+		frame.setBounds(100, 100, 950, 350);
+		frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel searchTrainFrameNameLabel = new JLabel("Пошук поїздів");
 		searchTrainFrameNameLabel.setFont(new Font("Tahoma", Font.BOLD, 26));
-		searchTrainFrameNameLabel.setBounds(283, 16, 486, 52);
+		searchTrainFrameNameLabel.setBounds(350, 16, 486, 52);
 		frame.getContentPane().add(searchTrainFrameNameLabel);
 		
 		JLabel fromLabel = new JLabel("Звідки");
@@ -57,7 +58,7 @@ public class SearchTrain {
 		frame.getContentPane().add(fromLabel);
 		
 		sourseStation.setModel(new DefaultComboBoxModel<String>(new String[] {"Назва станції", "Київ Пасажирський", "Дарниця", "Миргород", "Полтава Київська", "Харків-Пас"}));
-		sourseStation.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		sourseStation.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		sourseStation.setBounds(139, 144, 231, 26);
 		frame.getContentPane().add(sourseStation);
 		
@@ -67,7 +68,7 @@ public class SearchTrain {
 		frame.getContentPane().add(toLabel);
 		
 		destinationStation.setModel(new DefaultComboBoxModel<String>(new String[] {"Назва станції", "Харків", "Полтава Київська", "Миргород", "Дарниця", "Київ"}));
-		destinationStation.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		destinationStation.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		destinationStation.setBounds(139, 199, 231, 26);
 		frame.getContentPane().add(destinationStation);
 		
@@ -77,53 +78,58 @@ public class SearchTrain {
 		frame.getContentPane().add(passengerLabel);
 		
 		passengerAge.setModel(new DefaultComboBoxModel<String>(new String[] {"Дорослий", "Студент", "Дитячий", "Пенсіонер"}));
-		passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		passengerAge.setBounds(139, 265, 231, 26);
+		passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passengerAge.setBounds(139, 265, 231, 25);
 		frame.getContentPane().add(passengerAge);
 		
 		passengerNuber.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
-		passengerNuber.setBounds(403, 266, 51, 26);
+		passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passengerNuber.setBounds(403, 266, 51, 25);
 		frame.getContentPane().add(passengerNuber);
 		
 		JRadioButton oneWayButton = new JRadioButton("Квиток в один кінець");
-		oneWayButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		oneWayButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		oneWayButton.setSelected(true);
+		oneWayButton.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
+		oneWayButton.setOpaque(true);
 		oneWayButton.setBounds(24, 80, 319, 29);
 		frame.getContentPane().add(oneWayButton);
 		
 		JRadioButton returnButton = new JRadioButton("Туди і назад");
-		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		returnButton.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
+		returnButton.setOpaque(true);
 		returnButton.setBounds(368, 80, 231, 29);
 		frame.getContentPane().add(returnButton);
-		
+
 		ButtonGroup oneWayReturnButtonGroup = new ButtonGroup();
 		oneWayReturnButtonGroup.add(oneWayButton);
 		oneWayReturnButtonGroup.add(returnButton);
 		
 		JLabel departureDateLabel = new JLabel("Дата відправлення:");
-		departureDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		departureDateLabel.setBounds(457, 147, 257, 20);
+		departureDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		departureDateLabel.setBounds(457, 140, 257, 20);
 		frame.getContentPane().add(departureDateLabel);
 
 		JComboBox comboBox_4 = new JComboBox();
 		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
-		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_4.setBounds(710, 144, 270, 26);
+		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBox_4.setBounds(650, 140, 270, 25);
 		frame.getContentPane().add(comboBox_4);
 		
 		JLabel arrivalDateLabel = new JLabel("Дата повернення:");
-		arrivalDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		arrivalDateLabel.setBounds(467, 202, 247, 20);
+		arrivalDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		arrivalDateLabel.setBounds(457, 202, 247, 25);
 		frame.getContentPane().add(arrivalDateLabel);
 		
 		JComboBox comboBox_5 = new JComboBox();
 		comboBox_5.setModel(new DefaultComboBoxModel(new String[] {"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
-		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_5.setBounds(710, 199, 270, 26);
+		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBox_5.setBounds(650, 199, 270, 20);
 		frame.getContentPane().add(comboBox_5);
 		
-		searchTrainButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		searchTrainButton.setBounds(710, 264, 270, 29);
+		searchTrainButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		searchTrainButton.setBounds(650, 270, 270, 30);
 		frame.getContentPane().add(searchTrainButton);
 	} 
 	

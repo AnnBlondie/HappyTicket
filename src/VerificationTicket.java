@@ -3,6 +3,7 @@
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import java.awt.Color;
 import java.awt.ScrollPane;
 import java.awt.BorderLayout;
 
@@ -35,17 +36,18 @@ public class VerificationTicket {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 948, 454);
+		frame.setBounds(100, 100, 950, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
 		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("Кошик");
-		label.setFont(new Font("Tahoma", Font.BOLD, 26));
-		label.setBounds(45, 27, 342, 44);
-		frame.getContentPane().add(label);
+		JLabel verificationTicketLabel = new JLabel("Кошик");
+		verificationTicketLabel.setFont(new Font("Tahoma", Font.BOLD, 26));
+		verificationTicketLabel.setBounds(350, 16, 486, 52);
+		frame.getContentPane().add(verificationTicketLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(45, 102, 828, 103);
+		scrollPane.setBounds(30, 100, 900, 100);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -74,8 +76,8 @@ public class VerificationTicket {
 		table.getColumnModel().getColumn(3).setPreferredWidth(180);
 		scrollPane.setViewportView(table);
 		
-		verificationTicketButton.setFont(new Font("Tahoma", Font.BOLD, 19));
-		verificationTicketButton.setBounds(523, 274, 350, 44);
+		verificationTicketButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		verificationTicketButton.setBounds(650, 270, 270, 30);
 		frame.getContentPane().add(verificationTicketButton);
 	}
 	

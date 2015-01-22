@@ -12,9 +12,9 @@ import javax.swing.Icon;
  * Created by aandreyeva on 1/15/2015.
  */
 
-public class UserData extends JFrame {
+public final class UserData extends JFrame {//<-if we use JFrame later, we don't need to extend it
 
-    private JPanel thePanel = new JPanel();
+    private JPanel thePanel = new JPanel();//<-here we better use JFrame
     private JLabel label1 = new JLabel ("Бронювання створене"); //Reservation #?
     private JLabel label2 = new JLabel("Час виїзду | Маршрут | Місце | Вартість");
     private JTextField textField1 = new JTextField(42);//Think how to input reservation details into this field
@@ -26,12 +26,12 @@ public class UserData extends JFrame {
     private JButton button2 = new JButton("Відправити деталі бронювання", s);
 
 	public void setVisible(boolean b){//to show frame without making it public
-        this.setVisible(true);
+     //   this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
 	}
     
     //Constructor
     UserData(){
-
+    	//<-if we change JPanel to JFrame, "this" must be changed to "thePlane" and even then components will not appear as they should :(
         this.setSize(650, 450);//window size
         Toolkit tk = Toolkit.getDefaultToolkit();//creating Toolkit object
         Dimension dim = tk.getScreenSize();
@@ -58,7 +58,7 @@ public class UserData extends JFrame {
         c.gridy = 2;
         thePanel.add(button2, c);
         this.add(thePanel);
-
+        this.setVisible(true);
         textField1.requestFocus();
     }
 
@@ -81,5 +81,3 @@ public class UserData extends JFrame {
     }
 
 }
-
-

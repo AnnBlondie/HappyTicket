@@ -8,11 +8,9 @@
 			
 			ProcessController processController = new ProcessController(db);
 			
-			//db.selectAllTrains();
-			//db.selectTrainFromTo("Львів","Одеса");
-			//db.selectTrainFromTo("Київ Пасажирський","Харків");
-
-			//db.closeDB();
+			
+			//UserData ud = new UserData();
+			//ud.setVisible(true);
 
 	}
 }
