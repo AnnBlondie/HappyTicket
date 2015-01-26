@@ -1,8 +1,6 @@
 import java.sql.*;
-import org.postgresql.Driver;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+//import org.postgresql.Driver;
 
 public class DataBase {
 

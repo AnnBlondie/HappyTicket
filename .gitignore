@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.iml
+
+
+/target
+/test-output
+
+/.idea
+/.git
+/*.log
+/*.log.lck
