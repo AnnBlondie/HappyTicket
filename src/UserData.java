@@ -1,11 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.Icon;
-
 
 
 /**
@@ -15,7 +10,7 @@ import javax.swing.Icon;
 public final class UserData extends JFrame {//<-if we use JFrame later, we don't need to extend it
 
     private JPanel thePanel = new JPanel();//<-here we better use JFrame
-    private JLabel label1 = new JLabel ("Бронювання створене"); //Reservation #?
+    private JLabel label1 = new JLabel("Бронювання створене"); //Reservation #?
     private JLabel label2 = new JLabel("Час виїзду | Маршрут | Місце | Вартість");
     private JTextField textField1 = new JTextField(42);//Think how to input reservation details into this field
     private Icon d = new ImageIcon(getClass().getResource("D.png"));
@@ -25,13 +20,13 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
     private Icon s = new ImageIcon(getClass().getResource("S.png"));
     private JButton button2 = new JButton("Відправити деталі бронювання", s);
 
-	public void setVisible(boolean b){//to show frame without making it public
-     //   this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
-	}
-    
+    public void setVisible(boolean b) {//to show frame without making it public
+        //   this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
+    }
+
     //Constructor
-    UserData(){
-    	//<-if we change JPanel to JFrame, "this" must be changed to "thePlane" and even then components will not appear as they should :(
+    UserData() {
+        //<-if we change JPanel to JFrame, "this" must be changed to "thePlane" and even then components will not appear as they should :(
         this.setSize(650, 450);//window size
         Toolkit tk = Toolkit.getDefaultToolkit();//creating Toolkit object
         Dimension dim = tk.getScreenSize();
@@ -63,21 +58,21 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
     }
 
     //Methods
-    void addDeleteListener(ActionListener listenForDeleteButton){
+    void addDeleteListener(ActionListener listenForDeleteButton) {
         button1.addActionListener(listenForDeleteButton);
     }
 
-    public int getEmail(){
+    public int getEmail() {
         return Integer.parseInt(textField2.getText());
 
     }
 
-    void addSendListener(ActionListener listenForSendButton){
+    void addSendListener(ActionListener listenForSendButton) {
         button2.addActionListener(listenForSendButton);
     }
 
-    void displayErrorMessage(String errorMessage){
-        JOptionPane.showMessageDialog(this,errorMessage);
+    void displayErrorMessage(String errorMessage) {
+        JOptionPane.showMessageDialog(this, errorMessage);
     }
 
 }

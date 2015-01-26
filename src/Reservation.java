@@ -1,88 +1,87 @@
-import java.util.*;
+import java.util.Date;
 
-public class Reservation extends Customer{
-	
-	private int trainNumber;
-	private Date reservationDate;//include Time
-	private int reservationPlace;
-	private String reservatinName;
-	private double ticketPrice;
-	
-	public Reservation() {
-		super("");
-		this.trainNumber = 0;
-		this.reservationPlace = 0;
-		this.reservatinName = "";
-	}
+public class Reservation extends Customer {
 
-	public Reservation(Customer customer, int trainNumber, Date reservationDate,
-			int reservationPlace, String reservatinName) {
-		super(customer.getEmail());
-		this.trainNumber = trainNumber;
-		this.reservationDate = reservationDate;
-		this.reservationPlace = reservationPlace;
-		this.reservatinName = reservatinName;
-	}
+    private int trainNumber;
+    private Date reservationDate;//include Time
+    private int reservationPlace;
+    private String reservatinName;
+    private double ticketPrice;
 
+    public Reservation() {
+        super("");
+        this.trainNumber = 0;
+        this.reservationPlace = 0;
+        this.reservatinName = "";
+    }
 
-	public int getTrainNumber() {
-		return trainNumber;
-	}
+    public Reservation(Customer customer, int trainNumber, Date reservationDate,
+                       int reservationPlace, String reservatinName) {
+        super(customer.getEmail());
+        this.trainNumber = trainNumber;
+        this.reservationDate = reservationDate;
+        this.reservationPlace = reservationPlace;
+        this.reservatinName = reservatinName;
+    }
 
 
-	public void setTrainNumber(int trainNumber) {
-		this.trainNumber = trainNumber;
-	}
+    public int getTrainNumber() {
+        return trainNumber;
+    }
 
 
-	public Date getReservationDate() {
-		return reservationDate;
-	}
+    public void setTrainNumber(int trainNumber) {
+        this.trainNumber = trainNumber;
+    }
 
 
-	public void setReservationDate(Date reservationDate) {
-		this.reservationDate = reservationDate;
-	}
+    public Date getReservationDate() {
+        return reservationDate;
+    }
 
 
-	public int getReservationPlace() {
-		return reservationPlace;
-	}
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
 
 
-	public void setReservationPlace(int reservationPlace) {
-		this.reservationPlace = reservationPlace;
-	}
+    public int getReservationPlace() {
+        return reservationPlace;
+    }
 
 
-	public String getReservatinName() {
-		return reservatinName;
-	}
+    public void setReservationPlace(int reservationPlace) {
+        this.reservationPlace = reservationPlace;
+    }
 
 
-	public void setReservatinName(String reservatinName) {
-		this.reservatinName = reservatinName;
-	}
-
-	public double getTicketPrice() {
-		return ticketPrice;
-	}
-
-	public void setTicketPrice(double ticketPrice) {
-		this.ticketPrice = ticketPrice;
-	}
-
-	@Override
-	public String toString() {
-		return "customerEmail="+super.getEmail()+" [reservatinName=" + reservatinName +
-				", trainNumber=" + trainNumber + ", reservationDate="
-				+ reservationDate.toString() + ", reservationPlace=" + reservationPlace
-				+ ", ticketPrice="+ticketPrice+"]";
-	}
+    public String getReservatinName() {
+        return reservatinName;
+    }
 
 
-	
-	//public void sendEmail(Reservation r){
-	//
-	//}
+    public void setReservatinName(String reservatinName) {
+        this.reservatinName = reservatinName;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "customerEmail=" + super.getEmail() + " [reservatinName=" + reservatinName +
+                ", trainNumber=" + trainNumber + ", reservationDate="
+                + reservationDate.toString() + ", reservationPlace=" + reservationPlace
+                + ", ticketPrice=" + ticketPrice + "]";
+    }
+
+
+    //public void sendEmail(Reservation r){
+    //
+    //}
 }
