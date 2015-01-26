@@ -1,4 +1,8 @@
-﻿import javax.swing.*;
+/**
+ * Created by Alena on 26.01.2015.
+ */
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
