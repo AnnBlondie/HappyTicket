@@ -1,81 +1,86 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 
 public class FoundRoutes {
 
     private JFrame frame;
     private JScrollPane scrollPane;
-    private JTable table;
+    private boolean twoWayTicket=false;
+    private JScrollPane backScrollPane;
     private JButton foundRoutesButton = new JButton("Далі");
+    ButtonGroup thereTrainsButtonGroup = new ButtonGroup();
+    ButtonGroup backTrainsButtonGroup = new ButtonGroup();
 
     public FoundRoutes() {
-        initialize();
-    }
-
-    public void setVisible(boolean b) {//to show frame without making it public
-        frame.setVisible(b);
-    }
-
-    private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 950, 350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         frame.getContentPane().setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Знайдені Маршрути");
-        lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 26));
-        lblNewLabel.setBounds(277, 16, 471, 43);
-        frame.getContentPane().add(lblNewLabel);
+        JLabel foundRoutsFrameNameLabel = new JLabel("Знайдені Маршрути");
+        foundRoutsFrameNameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 26));
+        foundRoutsFrameNameLabel.setBounds(277, 16, 471, 43);
+        frame.getContentPane().add(foundRoutsFrameNameLabel);
 
+        String s=String.format("%6s  %40s  %20s  %25s  %13s  %13s", 
+        		"№ ","Звідки / Куди   ","Дата","Відправлення / Прибуття","Тривалість","Вільних місць");
+        JLabel columsName = new JLabel(s);
+        columsName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        columsName.setBounds(30, 70, 900, 20);
+        frame.add(columsName);
+        
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(30, 80, 900, 150);
         frame.getContentPane().add(scrollPane);
+        backScrollPane = new JScrollPane();
+        frame.getContentPane().add(backScrollPane);
 
-        table = new JTable();
-        table.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        table.setModel(new DefaultTableModel(
-                new Object[10][6],
-                new String[]{"№ поїзда", "Звідки / Куди", "Дата", "Відправлення / Прибуття", "Тривалість", "Вільних місць"}
-        ) {
-            Class[] columnTypes = new Class[]{
-                    String.class, String.class, String.class, String.class, Object.class, Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }
-        });
-        table.getColumnModel().getColumn(0).setPreferredWidth(80);
-        table.getColumnModel().getColumn(1).setPreferredWidth(250);
-        table.getColumnModel().getColumn(2).setPreferredWidth(80);
-        table.getColumnModel().getColumn(3).setPreferredWidth(209);
-        table.getColumnModel().getColumn(4).setPreferredWidth(80);
-        table.getColumnModel().getColumn(5).setPreferredWidth(100);
-
-        scrollPane.setViewportView(table);
+        scrollPane.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
+        scrollPane.setOpaque(true);
 
         foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         foundRoutesButton.setBounds(650, 270, 270, 30);
         frame.getContentPane().add(foundRoutesButton);
     }
 
-    public void addRoute(String s[][]) {
-        int i = 0;
-        while (i < s.length) {
-            table.setValueAt(s[i][0], i, 0);
-            table.setValueAt(s[i][1], i, 1);
-            table.setValueAt(s[i][2], i, 2);
-            table.setValueAt(s[i][3], i, 3);
-            table.setValueAt(s[i][4], i, 4);
-            table.setValueAt(s[i][5], i, 5);
+    public void setVisible(boolean b) {//to show frame without making it public
+        frame.setVisible(b);
+    }
+
+    public void setTwoWayTicket(Boolean b){
+    	twoWayTicket=b;
+    }
+  
+    public void addRoute(Map<String, String> there, Map<String, String> back) {
+    	addPaneContain(there, scrollPane, thereTrainsButtonGroup);
+    	addPaneContain(back, backScrollPane, backTrainsButtonGroup);
+        scrollPane.setBounds(30, 90, 900, 30*there.size());
+        backScrollPane.setBounds(30, 100+30*there.size(), 900, 30*back.size());
+        backScrollPane.setVisible(twoWayTicket);
+    }
+
+    private void addPaneContain(Map<String, String> map, JScrollPane pane, ButtonGroup buttonGroup){
+    	int i = 0;
+        for (String key: map.keySet()) {
+            JLabel train = new JLabel(map.get(key));
+            train.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            train.setBounds(0, 30*i, 700, 30);
+            train.setVisible(true);
+            JRadioButton rb = new JRadioButton("");
+            rb.setSelected(false);
+            rb.setVisible(true);
+            rb.setOpaque(true);
+            rb.setBounds(870, 10+30*i, 17, 15);
+            buttonGroup.add(rb);
+            pane.add(rb);
+            pane.add(train, i);
             i++;
         }
     }
-
+    
     void addFoundRoutesListener(ActionListener listenForFoundRoutesButton) {
         foundRoutesButton.addActionListener(listenForFoundRoutesButton);
     }

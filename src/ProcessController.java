@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class ProcessController {
     //parameters - our model-class object (DataBase) and all views
@@ -13,38 +14,60 @@ public class ProcessController {
     public ProcessController(DataBase dataBase) {
 
         this.dataBase = dataBase;
-        SearchTrain searchTrainView = new SearchTrain();
-        FoundRoutes foundRoutesView = new FoundRoutes();
-        SeatSelection seatSelectionView = new SeatSelection();
-        VerificationTicket verificationTicketView = new VerificationTicket();
-        this.searchTrainView = searchTrainView;
-        this.foundRoutesView = foundRoutesView;
-        this.seatSelectionView = seatSelectionView;
-        this.verificationTicketView = verificationTicketView;
-
-        //adding listener to react on first view's button. Initialized with object of specific class
-        this.searchTrainView.addSearchTrainListener(new SearchTrainerListener());
-        this.foundRoutesView.addFoundRoutesListener(new FoundRoutesListener());
-        this.seatSelectionView.addCanselSeatSelectionListener(new CanselSeatSelectionListener());
-        this.seatSelectionView.addReserveSeatSelectionListener(new ResearveSeatListener());
-        this.verificationTicketView.addVerificationTicketListener(new VerificationTicketListener());
-        this.searchTrainView.setVisible(true);
+        searchTrainView = new SearchTrain(this.dataBase.selectAllStations());
+        foundRoutesView = new FoundRoutes();
+        seatSelectionView = new SeatSelection();
+        verificationTicketView = new VerificationTicket();
+        UserData userDataView = new UserData();
+        
+        //adding listeners to react on first view's buttons. Initialized with object of specific class
+        searchTrainView.addOneWayButtonListener(new OneWayButtonListener());
+        searchTrainView.addReturnButtonListener(new ReturnButtonListener());
+        searchTrainView.addSearchTrainListener(new SearchTrainerListener());
+        
+        
+        foundRoutesView.addFoundRoutesListener(new FoundRoutesListener());
+        seatSelectionView.addCanselSeatSelectionListener(new CanselSeatSelectionListener());
+        seatSelectionView.addReserveSeatSelectionListener(new ResearveSeatListener());
+        verificationTicketView.addVerificationTicketListener(new VerificationTicketListener());
+        searchTrainView.setVisible(true);
     }
 
     //specific class for connecting first and second views
+    class OneWayButtonListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			try {
+                foundRoutesView.setTwoWayTicket(false);
+            } catch (Exception e) {
+                //do nothing
+            }
+		}
+    }
+    
+    class ReturnButtonListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			try {
+                foundRoutesView.setTwoWayTicket(true);
+            } catch (Exception e) {
+                //do nothing
+            }
+		}
+    }
+    
     class SearchTrainerListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 searchTrainView.setVisible(false);
-                String[][] s = dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
+                Map<String, String> there = dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
                         searchTrainView.destinationStation.getSelectedItem().toString());
-
+                Map<String, String> back = dataBase.selectTrainFromTo(searchTrainView.destinationStation.getSelectedItem().toString(),
+                		searchTrainView.sourseStation.getSelectedItem().toString());
                 //here result of train searching by DataBase's method selectTrainFromTo are
                 //fulfilled text fields in next view
-                foundRoutesView.addRoute(s);
-
+                foundRoutesView.addRoute(there,back);
                 foundRoutesView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
@@ -98,8 +121,8 @@ public class ProcessController {
         public void actionPerformed(ActionEvent arg0) {
             try {
                 verificationTicketView.setVisible(false);
-                UserData userDataView = new UserData();
-                //this.userDataView=userDataView;
+                //UserData userDataView = new UserData();
+               //	userDataView.setVisible(true);
 
             } catch (Exception e) {
                 //do nothing
