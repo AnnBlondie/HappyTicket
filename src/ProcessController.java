@@ -16,7 +16,7 @@ public class ProcessController {
         this.dataBase = dataBase;
         searchTrainView = new SearchTrain(this.dataBase.selectAllStations());
         foundRoutesView = new FoundRoutes();
-        seatSelectionView = new SeatSelection();
+        seatSelectionView = new SeatSelection(1);
         verificationTicketView = new VerificationTicket();
         UserData userDataView = new UserData();
         
@@ -25,7 +25,7 @@ public class ProcessController {
         searchTrainView.addReturnButtonListener(new ReturnButtonListener());
         searchTrainView.addSearchTrainListener(new SearchTrainerListener());
         
-        
+        foundRoutesView.addBackButtonListener(new FoundRoutesBackListener());
         foundRoutesView.addFoundRoutesListener(new FoundRoutesListener());
         seatSelectionView.addCanselSeatSelectionListener(new CanselSeatSelectionListener());
         seatSelectionView.addReserveSeatSelectionListener(new ResearveSeatListener());
@@ -61,12 +61,15 @@ public class ProcessController {
         public void actionPerformed(ActionEvent arg0) {
             try {
                 searchTrainView.setVisible(false);
-                Map<String, String> there = dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
-                        searchTrainView.destinationStation.getSelectedItem().toString());
-                Map<String, String> back = dataBase.selectTrainFromTo(searchTrainView.destinationStation.getSelectedItem().toString(),
-                		searchTrainView.sourseStation.getSelectedItem().toString());
-                //here result of train searching by DataBase's method selectTrainFromTo are
-                //fulfilled text fields in next view
+                Map<String, String> there = 
+                		dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
+                        searchTrainView.destinationStation.getSelectedItem().toString(),
+                        searchTrainView.oneWayDate.getSelectedItem().toString());
+                Map<String, String> back = 
+                		dataBase.selectTrainFromTo(searchTrainView.destinationStation.getSelectedItem().toString(),
+                		searchTrainView.sourseStation.getSelectedItem().toString(),
+                		searchTrainView.returnDate.getSelectedItem().toString());
+
                 foundRoutesView.addRoute(there,back);
                 foundRoutesView.setVisible(true);
             } catch (Exception e) {
@@ -76,21 +79,36 @@ public class ProcessController {
     }
 
     class FoundRoutesListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 foundRoutesView.setVisible(false);
-
+                seatSelectionView.setTrainNumber(foundRoutesView.thereTrainsButtonGroup.getSelection()
+                		.getActionCommand());
+                if(foundRoutesView.getTwoWayTicket()){
+                	seatSelectionView.setTwoWayTicket(
+                			foundRoutesView.backTrainsButtonGroup.getSelection().getActionCommand());
+                }
                 seatSelectionView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
             }
         }
     }
-
+    
+    class FoundRoutesBackListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            try {
+                foundRoutesView.setVisible(false);
+                searchTrainView.setVisible(true);
+            } catch (Exception e) {
+                //do nothing
+            }
+        }
+    }
+    
     class CanselSeatSelectionListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {

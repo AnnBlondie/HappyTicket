@@ -10,6 +10,11 @@ public class SearchTrain {
     final JComboBox<String> destinationStation = new JComboBox<String>();
     final JComboBox<String> passengerAge = new JComboBox<String>();
     final JComboBox<String> passengerNuber = new JComboBox<String>();
+    
+    JComboBox oneWayDate = new JComboBox();
+    final JComboBox returnDate = new JComboBox();
+
+
     JRadioButton oneWayButton = new JRadioButton("Квиток в один кінець");
     JRadioButton returnButton = new JRadioButton("Туди і назад");
 
@@ -54,7 +59,7 @@ public class SearchTrain {
 
         passengerAge.setModel(new DefaultComboBoxModel<String>(new String[]{"Дорослий", "Студент", "Дитячий", "Пенсіонер"}));
         passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        passengerAge.setBounds(139, 265, 231, 25);
+        passengerAge.setBounds(139, 265, 231, 26);
         frame.getContentPane().add(passengerAge);
 
         passengerNuber.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
@@ -65,13 +70,13 @@ public class SearchTrain {
         oneWayButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         oneWayButton.setSelected(true);
         oneWayButton.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
-        oneWayButton.setBounds(24, 80, 319, 29);
+        oneWayButton.setBounds(100, 80, 319, 29);
         frame.getContentPane().add(oneWayButton);
 
         returnButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         returnButton.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         returnButton.setOpaque(true);
-        returnButton.setBounds(368, 80, 231, 29);
+        returnButton.setBounds(600, 80, 231, 29);
         frame.getContentPane().add(returnButton);
 
         ButtonGroup oneWayReturnButtonGroup = new ButtonGroup();
@@ -80,33 +85,31 @@ public class SearchTrain {
 
         JLabel departureDateLabel = new JLabel("Дата відправлення:");
         departureDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        departureDateLabel.setBounds(457, 140, 257, 20);
+        departureDateLabel.setBounds(457, 148, 257, 20);
         frame.getContentPane().add(departureDateLabel);
 
-        JComboBox comboBox_4 = new JComboBox();
-        comboBox_4.setModel(new DefaultComboBoxModel(new String[]{"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
-        comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        comboBox_4.setBounds(650, 140, 270, 25);
-        frame.getContentPane().add(comboBox_4);
+        oneWayDate.setModel(new DefaultComboBoxModel(new String[]{"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
+        oneWayDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        oneWayDate.setBounds(650, 144, 231, 26);
+        frame.getContentPane().add(oneWayDate);
         
         final JLabel arrivalDateLabel = new JLabel("Дата повернення:");
         arrivalDateLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        arrivalDateLabel.setBounds(457, 202, 247, 25);
+        arrivalDateLabel.setBounds(457, 203, 247, 25);
         arrivalDateLabel.setVisible(false);
         frame.getContentPane().add(arrivalDateLabel);
   
-        final JComboBox comboBox_5 = new JComboBox();
-        comboBox_5.setModel(new DefaultComboBoxModel(new String[]{"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
-        comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        comboBox_5.setBounds(650, 199, 270, 20);
-        comboBox_5.setVisible(false);
-        frame.getContentPane().add(comboBox_5);
+        returnDate.setModel(new DefaultComboBoxModel(new String[]{"18/12/2014", "19/12/2014", "20/12/2014", "21/12/2014", "22/12/2014", "23/12/2014"}));
+        returnDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        returnDate.setBounds(650, 199, 231, 26);
+        returnDate.setVisible(false);
+        frame.getContentPane().add(returnDate);
         
         oneWayButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 	        	arrivalDateLabel.setVisible(false);
-	        	comboBox_5.setVisible(false);
+	        	returnDate.setVisible(false);
 			}        	
         });
 
@@ -114,7 +117,7 @@ public class SearchTrain {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 	        	arrivalDateLabel.setVisible(true);
-	        	comboBox_5.setVisible(true);
+	        	returnDate.setVisible(true);
 			}
         });
         

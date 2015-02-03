@@ -37,7 +37,7 @@ public class DataBase {
 	}
 	
     //to create data for second view - need addition(to show free seats number for every train)
-    public Map<String, String> selectTrainFromTo(String stationFrom, String stationTo) {
+    public Map<String, String> selectTrainFromTo(String stationFrom, String stationTo, String date) {
         Map<String, String> result = new HashMap<String, String>();
         try {
             Statement st = db.createStatement();
@@ -51,8 +51,8 @@ public class DataBase {
                     "(SELECT station_id FROM station WHERE station_name='" + stationTo + "');";
             ResultSet rs = st.executeQuery(s);
             while (rs.next()) {
-               result.put(rs.getString("train_id"), String.format("%6s %35s %25s %15s %10s %10s", 
-                		rs.getString("train_id"), stationFrom + "/" + stationTo,"",
+               result.put(rs.getString("train_id"), String.format("%35s %20s %25s %10s %10s", 
+                		stationFrom + "/" + stationTo, date,
                 		rs.getString("D1") + "/" + rs.getString("A2"),"",""));
             }
         } catch (Exception e) {

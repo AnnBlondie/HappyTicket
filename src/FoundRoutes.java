@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -13,6 +14,8 @@ public class FoundRoutes {
     private JButton foundRoutesButton = new JButton("Далі");
     ButtonGroup thereTrainsButtonGroup = new ButtonGroup();
     ButtonGroup backTrainsButtonGroup = new ButtonGroup();
+    JButton backButton = new JButton("Повернутися");
+
 
     public FoundRoutes() {
         frame = new JFrame();
@@ -26,7 +29,7 @@ public class FoundRoutes {
         foundRoutsFrameNameLabel.setBounds(277, 16, 471, 43);
         frame.getContentPane().add(foundRoutsFrameNameLabel);
 
-        String s=String.format("%6s  %40s  %20s  %25s  %13s  %13s", 
+        String s=String.format("%6s  %40s  %20s  %30s  %13s  %13s", 
         		"№ ","Звідки / Куди   ","Дата","Відправлення / Прибуття","Тривалість","Вільних місць");
         JLabel columsName = new JLabel(s);
         columsName.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -40,6 +43,12 @@ public class FoundRoutes {
 
         scrollPane.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         scrollPane.setOpaque(true);
+        
+
+        backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        backButton.setBounds(40, 270, 270, 30);
+        frame.getContentPane().add(backButton);
+
 
         foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         foundRoutesButton.setBounds(650, 270, 270, 30);
@@ -53,12 +62,16 @@ public class FoundRoutes {
     public void setTwoWayTicket(Boolean b){
     	twoWayTicket=b;
     }
+    
+    public boolean getTwoWayTicket(){
+    	return twoWayTicket;
+    }
   
     public void addRoute(Map<String, String> there, Map<String, String> back) {
     	addPaneContain(there, scrollPane, thereTrainsButtonGroup);
     	addPaneContain(back, backScrollPane, backTrainsButtonGroup);
-        scrollPane.setBounds(30, 90, 900, 30*there.size());
-        backScrollPane.setBounds(30, 100+30*there.size(), 900, 30*back.size());
+        scrollPane.setBounds(30, 90, 900, Math.min(30*there.size(),80));
+        backScrollPane.setBounds(30, 100+Math.min(30*there.size(),80), 900, Math.min(30*back.size(),80));
         backScrollPane.setVisible(twoWayTicket);
     }
 
@@ -67,18 +80,23 @@ public class FoundRoutes {
         for (String key: map.keySet()) {
             JLabel train = new JLabel(map.get(key));
             train.setFont(new Font("Tahoma", Font.PLAIN, 15));
-            train.setBounds(0, 30*i, 700, 30);
-            train.setVisible(true);
-            JRadioButton rb = new JRadioButton("");
+            train.setBounds(50, 30*i, 700, 30);
+            JRadioButton rb = new JRadioButton(key);
+            rb.setActionCommand(key);
             rb.setSelected(false);
             rb.setVisible(true);
+            rb.setFont(new Font("Tahoma", Font.PLAIN, 15));
             rb.setOpaque(true);
-            rb.setBounds(870, 10+30*i, 17, 15);
+            rb.setBounds(10, 5+30*i, 70, 18);
             buttonGroup.add(rb);
             pane.add(rb);
             pane.add(train, i);
             i++;
         }
+    }
+    
+    void addBackButtonListener(ActionListener listenFoundRoutesBackButton) {
+    	backButton.addActionListener(listenFoundRoutesBackButton);
     }
     
     void addFoundRoutesListener(ActionListener listenForFoundRoutesButton) {
