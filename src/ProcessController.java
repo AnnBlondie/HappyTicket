@@ -70,6 +70,7 @@ public class ProcessController {
                 		searchTrainView.sourseStation.getSelectedItem().toString(),
                 		searchTrainView.returnDate.getSelectedItem().toString());
 
+                foundRoutesView.initialize();
                 foundRoutesView.addRoute(there,back);
                 foundRoutesView.setVisible(true);
             } catch (Exception e) {
@@ -85,7 +86,8 @@ public class ProcessController {
                 foundRoutesView.setVisible(false);
                 seatSelectionView.setTrainNumber(foundRoutesView.thereTrainsButtonGroup.getSelection()
                 		.getActionCommand());
-                if(foundRoutesView.getTwoWayTicket()){
+               // if(foundRoutesView.getTwoWayTicket())
+                {
                 	seatSelectionView.setTwoWayTicket(
                 			foundRoutesView.backTrainsButtonGroup.getSelection().getActionCommand());
                 }
@@ -101,6 +103,7 @@ public class ProcessController {
         public void actionPerformed(ActionEvent arg0) {
             try {
                 foundRoutesView.setVisible(false);
+                
                 searchTrainView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
