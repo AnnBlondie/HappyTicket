@@ -21,7 +21,7 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
     private JButton button2 = new JButton("Відправити деталі бронювання", s);
 
     public void setVisible(boolean b) {//to show frame without making it public
-        //   this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
+  //         this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
     }
 
     //Constructor

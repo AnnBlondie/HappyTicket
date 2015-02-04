@@ -8,59 +8,39 @@ public class ProcessController {
     private SearchTrain searchTrainView;
     private FoundRoutes foundRoutesView;
     private SeatSelection seatSelectionView;
-    private VerificationTicket verificationTicketView;
     private UserData userDataView;
 
     public ProcessController(DataBase dataBase) {
 
         this.dataBase = dataBase;
+        //initializing first view with list of stations from our database
         searchTrainView = new SearchTrain(this.dataBase.selectAllStations());
         foundRoutesView = new FoundRoutes();
-        seatSelectionView = new SeatSelection(1);
-        verificationTicketView = new VerificationTicket();
+        seatSelectionView = new SeatSelection();
         UserData userDataView = new UserData();
         
-        //adding listeners to react on first view's buttons. Initialized with object of specific class
-        searchTrainView.addOneWayButtonListener(new OneWayButtonListener());
-        searchTrainView.addReturnButtonListener(new ReturnButtonListener());
+        //adding listener to react on first view's button
         searchTrainView.addSearchTrainListener(new SearchTrainerListener());
         
+        //adding listeners to react on second view's buttons
         foundRoutesView.addBackButtonListener(new FoundRoutesBackListener());
         foundRoutesView.addFoundRoutesListener(new FoundRoutesListener());
+        
+        //adding listeners to react on third view's buttons
         seatSelectionView.addCanselSeatSelectionListener(new CanselSeatSelectionListener());
         seatSelectionView.addReserveSeatSelectionListener(new ResearveSeatListener());
-        verificationTicketView.addVerificationTicketListener(new VerificationTicketListener());
+        
+        //show first view
         searchTrainView.setVisible(true);
     }
 
-    //specific class for connecting first and second views
-    class OneWayButtonListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			try {
-                foundRoutesView.setTwoWayTicket(false);
-            } catch (Exception e) {
-                //do nothing
-            }
-		}
-    }
-    
-    class ReturnButtonListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			try {
-                foundRoutesView.setTwoWayTicket(true);
-            } catch (Exception e) {
-                //do nothing
-            }
-		}
-    }
-    
+    //creating second view by first view's data - UNDONE (need to add time and free seat count)
     class SearchTrainerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 searchTrainView.setVisible(false);
+                foundRoutesView.setTwoWayTicket(searchTrainView.returnButton.isSelected());
                 Map<String, String> there = 
                 		dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
                         searchTrainView.destinationStation.getSelectedItem().toString(),
@@ -69,7 +49,6 @@ public class ProcessController {
                 		dataBase.selectTrainFromTo(searchTrainView.destinationStation.getSelectedItem().toString(),
                 		searchTrainView.sourseStation.getSelectedItem().toString(),
                 		searchTrainView.returnDate.getSelectedItem().toString());
-
                 foundRoutesView.initialize();
                 foundRoutesView.addRoute(there,back);
                 foundRoutesView.setVisible(true);
@@ -78,18 +57,35 @@ public class ProcessController {
             }
         }
     }
-
+ 
+    //return back from second view to first
+    class FoundRoutesBackListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            try {
+                foundRoutesView.setVisible(false);           
+                searchTrainView.setVisible(true);
+            } catch (Exception e) {
+                //do nothing
+            }
+        }
+    }
+  
+    //creating third view by second view's data - UNDONE (need to add in some way wagon type and selections)
     class FoundRoutesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 foundRoutesView.setVisible(false);
-                seatSelectionView.setTrainNumber(foundRoutesView.thereTrainsButtonGroup.getSelection()
-                		.getActionCommand());
-               // if(foundRoutesView.getTwoWayTicket())
-                {
+                
+                if(foundRoutesView.getTwoWayTicket()){
                 	seatSelectionView.setTwoWayTicket(
+                			foundRoutesView.thereTrainsButtonGroup.getSelection().getActionCommand(),
                 			foundRoutesView.backTrainsButtonGroup.getSelection().getActionCommand());
+                }
+                else{
+                    seatSelectionView.setTrainNumber(foundRoutesView.thereTrainsButtonGroup.getSelection()
+                    		.getActionCommand());
                 }
                 seatSelectionView.setVisible(true);
             } catch (Exception e) {
@@ -97,20 +93,8 @@ public class ProcessController {
             }
         }
     }
-    
-    class FoundRoutesBackListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            try {
-                foundRoutesView.setVisible(false);
-                
-                searchTrainView.setVisible(true);
-            } catch (Exception e) {
-                //do nothing
-            }
-        }
-    }
-    
+
+    //return back from third view to second
     class CanselSeatSelectionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
@@ -123,32 +107,30 @@ public class ProcessController {
         }
     }
 
+    //creating fourth view by third view's data - UNDONE
     class ResearveSeatListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 seatSelectionView.setVisible(false);
-                verificationTicketView.setVisible(true);
+               	userDataView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
             }
         }
     }
-
-    class VerificationTicketListener implements ActionListener {
-
+    
+    //return back from forth view to third - UNDONE
+    class CanselResearveSeatListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
-                verificationTicketView.setVisible(false);
-                //UserData userDataView = new UserData();
-               //	userDataView.setVisible(true);
-
+               	userDataView.setVisible(false);
+            	seatSelectionView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
             }
         }
-
     }
+    
 }

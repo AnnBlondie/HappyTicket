@@ -11,9 +11,9 @@ public class SearchTrain {
     final JComboBox<String> passengerAge = new JComboBox<String>();
     final JComboBox<String> passengerNuber = new JComboBox<String>();
     
+    //this should be redone
     JComboBox oneWayDate = new JComboBox();
     final JComboBox returnDate = new JComboBox();
-
 
     JRadioButton oneWayButton = new JRadioButton("Квиток в один кінець");
     JRadioButton returnButton = new JRadioButton("Туди і назад");
@@ -21,6 +21,10 @@ public class SearchTrain {
     private JButton searchTrainButton = new JButton("Пошук поїздів");
 
     public SearchTrain(String[] allStations) {
+    	initialize(allStations);
+    }
+    
+    private void initialize(String[] allStations){
         frame = new JFrame();
         frame.setBounds(100, 100, 950, 350);
         frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
@@ -52,16 +56,19 @@ public class SearchTrain {
         destinationStation.setBounds(139, 199, 231, 26);
         frame.getContentPane().add(destinationStation);
 
+        //what for?
         JLabel passengerLabel = new JLabel("Пасажир");
         passengerLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         passengerLabel.setBounds(29, 269, 109, 20);
         frame.getContentPane().add(passengerLabel);
-
+        
+        //what for?
         passengerAge.setModel(new DefaultComboBoxModel<String>(new String[]{"Дорослий", "Студент", "Дитячий", "Пенсіонер"}));
         passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
         passengerAge.setBounds(139, 265, 231, 26);
         frame.getContentPane().add(passengerAge);
 
+        //what for?
         passengerNuber.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
         passengerAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
         passengerNuber.setBounds(403, 266, 51, 25);
@@ -129,10 +136,6 @@ public class SearchTrain {
 
     public void setVisible(boolean b) {//to show frame without making it public
         frame.setVisible(b);
-    }
-
-    void addOneWayButtonListener(ActionListener listenForOneWayButton){
-    	oneWayButton.addActionListener(listenForOneWayButton);
     }
     
     void addReturnButtonListener(ActionListener listenForReturnButton){

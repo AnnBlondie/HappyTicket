@@ -9,7 +9,7 @@ public class FoundRoutes {
 
     private JFrame frame;
     private JScrollPane scrollPane;
-    private boolean twoWayTicket=false;
+    private boolean twoWayTicket;
     private JScrollPane backScrollPane;
     private JButton foundRoutesButton = new JButton("Далі");
     ButtonGroup thereTrainsButtonGroup = new ButtonGroup();
@@ -21,6 +21,10 @@ public class FoundRoutes {
     	initialize();
     }
     
+    public void setVisible(boolean b) {//to show frame without making it public
+        frame.setVisible(b);
+    }
+
     public void initialize(){
         frame = new JFrame();
         frame.setBounds(100, 100, 950, 350);
@@ -47,20 +51,14 @@ public class FoundRoutes {
 
         scrollPane.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         scrollPane.setOpaque(true);
-        
 
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         backButton.setBounds(40, 270, 270, 30);
         frame.getContentPane().add(backButton);
 
-
         foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         foundRoutesButton.setBounds(650, 270, 270, 30);
         frame.getContentPane().add(foundRoutesButton);
-    }
-
-    public void setVisible(boolean b) {//to show frame without making it public
-        frame.setVisible(b);
     }
 
     public void setTwoWayTicket(Boolean b){
@@ -71,6 +69,7 @@ public class FoundRoutes {
     	return twoWayTicket;
     }
   
+    //set panes of there and back routes 
     public void addRoute(Map<String, String> there, Map<String, String> back) {
     	addPaneContain(there, scrollPane, thereTrainsButtonGroup);
     	addPaneContain(back, backScrollPane, backTrainsButtonGroup);
@@ -79,6 +78,7 @@ public class FoundRoutes {
         backScrollPane.setVisible(twoWayTicket);
     }
 
+    //fulfilling pane
     private void addPaneContain(Map<String, String> map, JScrollPane pane, ButtonGroup buttonGroup){
     	int i = 0;
         for (String key: map.keySet()) {
