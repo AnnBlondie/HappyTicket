@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 public class SeatSelection {
 
     private JFrame frame;
-    private String trainNumber;
-    private String backTrainNumber;
+    private Train forwardTrain= new Train("");
+    private Train backTrain=new Train("");
     private boolean twoWayTicket;
     JComboBox<String> wagonBox = new JComboBox<String>();
     JComboBox<String> seatBox = new JComboBox<String>();
@@ -30,23 +30,27 @@ public class SeatSelection {
         frame.setVisible(b);
     }
     
-    public void setTrainNumber(String trainNumber){
+    public void setTrain(String forwardTrainNumber){
     	twoWayTicket=false;
-    	this.trainNumber=trainNumber;
+    	forwardTrain=new Train(forwardTrainNumber);
     	initialize();
     }
     
-    public void setTwoWayTicket(String trainNumber, String backTrainNumber){
+    public void setTwoTrains(String forwardTrainNumber, String backTrainNumber){
     	twoWayTicket=true;
-    	this.trainNumber=trainNumber;
-    	this.backTrainNumber=backTrainNumber;
+    	forwardTrain=new Train(forwardTrainNumber);
+    	backTrain=new Train(backTrainNumber);
     	initialize();
     }
     
-    public String getTrainNumber(){
-    	return trainNumber;
+    public Train getForwardTrain(){
+    	return forwardTrain;
     }
-
+    
+    public Train getBackTrain(){
+    	return backTrain;
+    }
+    
     public void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 950, 350);
@@ -59,7 +63,7 @@ public class SeatSelection {
         seatSelectionLabel.setBounds(350, 16, 486, 52);
         frame.getContentPane().add(seatSelectionLabel);
 
-        JLabel trainNumberLabel = new JLabel("Поїзд №" +trainNumber);
+        JLabel trainNumberLabel = new JLabel("Поїзд №" +forwardTrain.getTrainNumber());
         trainNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         trainNumberLabel.setBounds(40, 70, 133, 41);
         frame.getContentPane().add(trainNumberLabel);
@@ -69,9 +73,14 @@ public class SeatSelection {
         wagonLabel.setBounds(40, 100, 177, 50);
         frame.getContentPane().add(wagonLabel);
 
-        wagonBox.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
-        wagonBox.setBounds(200, 110, 87, 26);
+        wagonBox.setModel(new DefaultComboBoxModel<String>(new String[]{"К", "П", "Л", "С1", "С2"}));
+        wagonBox.setBounds(200, 110, 40, 26);
         frame.getContentPane().add(wagonBox);
+        
+        JComboBox<String> wagonBox2 = new JComboBox<String>();
+        wagonBox2.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
+        wagonBox2.setBounds(240, 110, 40, 26);
+        frame.getContentPane().add(wagonBox2);
 
         JLabel seatLabel = new JLabel("Оберіть місце");
         seatLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -100,7 +109,7 @@ public class SeatSelection {
         
         //right part - data for return ticket 
         
-        JLabel backTrainNumberLabel = new JLabel("Поїзд №" +this.backTrainNumber);
+        JLabel backTrainNumberLabel = new JLabel("Поїзд №" +this.backTrain.getTrainNumber());
         backTrainNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         backTrainNumberLabel.setBounds(440, 70, 133, 41);
         backTrainNumberLabel.setVisible(twoWayTicket);
@@ -112,11 +121,17 @@ public class SeatSelection {
         backWagonLabel.setVisible(twoWayTicket);
         frame.getContentPane().add(backWagonLabel);
 
-        backWagonBox.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
-        backWagonBox.setBounds(600, 110, 87, 26);
+        backWagonBox.setModel(new DefaultComboBoxModel<String>(new String[]{"К", "П", "Л", "С1", "С2"}));
+        backWagonBox.setBounds(600, 110, 40, 26);
         backWagonBox.setVisible(twoWayTicket);
         frame.getContentPane().add(backWagonBox);
-
+        
+        JComboBox<String> backWagonBox2 = new JComboBox<String>();
+        backWagonBox2.setModel(new DefaultComboBoxModel<String>(new String[]{"1", "2", "3", "4", "5"}));
+        backWagonBox2.setBounds(640, 110, 40, 26);
+        backWagonBox2.setVisible(twoWayTicket);
+        frame.getContentPane().add(backWagonBox2);
+        
         JLabel backSeatLabel = new JLabel("Оберіть місце");
         backSeatLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         backSeatLabel.setBounds(440, 130, 126, 50);
@@ -153,4 +168,3 @@ public class SeatSelection {
         canselButton.addActionListener(listenCanselSeatSelectionButton);
     }
 }
-

@@ -34,18 +34,18 @@ public class ProcessController {
         searchTrainView.setVisible(true);
     }
 
-    //creating second view by first view's data - UNDONE (need to add time and free seat count)
+    //creating second view by first view's data
     class SearchTrainerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 searchTrainView.setVisible(false);
                 foundRoutesView.setTwoWayTicket(searchTrainView.returnButton.isSelected());
-                Map<String, String> there = 
+                Map<Train, String> there = 
                 		dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
                         searchTrainView.destinationStation.getSelectedItem().toString(),
                         searchTrainView.oneWayDate.getSelectedItem().toString());
-                Map<String, String> back = 
+                Map<Train, String> back = 
                 		dataBase.selectTrainFromTo(searchTrainView.destinationStation.getSelectedItem().toString(),
                 		searchTrainView.sourseStation.getSelectedItem().toString(),
                 		searchTrainView.returnDate.getSelectedItem().toString());
@@ -79,12 +79,12 @@ public class ProcessController {
                 foundRoutesView.setVisible(false);
                 
                 if(foundRoutesView.getTwoWayTicket()){
-                	seatSelectionView.setTwoWayTicket(
+                	seatSelectionView.setTwoTrains(
                 			foundRoutesView.thereTrainsButtonGroup.getSelection().getActionCommand(),
                 			foundRoutesView.backTrainsButtonGroup.getSelection().getActionCommand());
                 }
                 else{
-                    seatSelectionView.setTrainNumber(foundRoutesView.thereTrainsButtonGroup.getSelection()
+                    seatSelectionView.setTrain(foundRoutesView.thereTrainsButtonGroup.getSelection()
                     		.getActionCommand());
                 }
                 seatSelectionView.setVisible(true);

@@ -137,6 +137,10 @@ public class SearchTrain {
     public void setVisible(boolean b) {//to show frame without making it public
         frame.setVisible(b);
     }
+
+    void addOneWayButtonListener(ActionListener listenForOneWayButton){
+    	oneWayButton.addActionListener(listenForOneWayButton);
+    }
     
     void addReturnButtonListener(ActionListener listenForReturnButton){
     	returnButton.addActionListener(listenForReturnButton);

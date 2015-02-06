@@ -70,7 +70,7 @@ public class FoundRoutes {
     }
   
     //set panes of there and back routes 
-    public void addRoute(Map<String, String> there, Map<String, String> back) {
+    public void addRoute(Map<Train, String> there, Map<Train, String> back) {
     	addPaneContain(there, scrollPane, thereTrainsButtonGroup);
     	addPaneContain(back, backScrollPane, backTrainsButtonGroup);
         scrollPane.setBounds(30, 90, 900, Math.min(30*there.size(),80));
@@ -79,14 +79,14 @@ public class FoundRoutes {
     }
 
     //fulfilling pane
-    private void addPaneContain(Map<String, String> map, JScrollPane pane, ButtonGroup buttonGroup){
+    private void addPaneContain(Map<Train, String> map, JScrollPane pane, ButtonGroup buttonGroup){
     	int i = 0;
-        for (String key: map.keySet()) {
+        for (Train key: map.keySet()) {
             JLabel train = new JLabel(map.get(key));
             train.setFont(new Font("Tahoma", Font.PLAIN, 15));
-            train.setBounds(50, 30*i, 700, 30);
-            JRadioButton rb = new JRadioButton(key);
-            rb.setActionCommand(key);
+            train.setBounds(30, 30*i, 880, 30);
+            JRadioButton rb = new JRadioButton(key.getTrainNumber());
+            rb.setActionCommand(key.getTrainNumber());
             rb.setSelected(false);
             rb.setVisible(true);
             rb.setFont(new Font("Tahoma", Font.PLAIN, 15));
