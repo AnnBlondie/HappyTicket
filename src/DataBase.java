@@ -96,9 +96,11 @@ public class DataBase {
     	try {
 			Statement st = db.createStatement();
 			String s="SELECT wagon_type, wagon_num FROM wagon  WHERE train_id='"+train.getTrainNumber()+"';";
-			ResultSet rs = st.executeQuery(s);
+			ResultSet rs = st.executeQuery(s); int i=0;
 			while(rs.next()){
 				train.addWagon(rs.getString("wagon_type"), Integer.parseInt(rs.getString("wagon_num")));
+				System.out.println(train.getWagons().get(i).getNumber()+" "+train.getWagons().get(i).getType());
+				i++;
 			}
 		} 
 		catch (Exception e) {

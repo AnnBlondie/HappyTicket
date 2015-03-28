@@ -5,60 +5,58 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 
-public class FoundRoutes {
+public final class FoundRoutes extends JFrame{
 
-    private JFrame frame;
     private JScrollPane scrollPane;
     private boolean twoWayTicket;
     private JScrollPane backScrollPane;
     private JButton foundRoutesButton = new JButton("Далі");
+    private JButton backButton = new JButton("Повернутися");
+
     ButtonGroup thereTrainsButtonGroup = new ButtonGroup();
     ButtonGroup backTrainsButtonGroup = new ButtonGroup();
-    JButton backButton = new JButton("Повернутися");
-
 
     public FoundRoutes() {
     	initialize();
     }
     
-    public void setVisible(boolean b) {//to show frame without making it public
-        frame.setVisible(b);
-    }
-
     public void initialize(){
-        frame = new JFrame();
-        frame.setBounds(100, 100, 950, 350);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
-        frame.getContentPane().setLayout(null);
+        this.setBounds(100, 100, 950, 350);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
+        this.getContentPane().setLayout(null);
 
         JLabel foundRoutsFrameNameLabel = new JLabel("Знайдені Маршрути");
         foundRoutsFrameNameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 26));
         foundRoutsFrameNameLabel.setBounds(277, 16, 471, 43);
-        frame.getContentPane().add(foundRoutsFrameNameLabel);
+        this.getContentPane().add(foundRoutsFrameNameLabel);
 
         String s=String.format("%6s  %40s  %20s  %30s  %13s  %13s", 
         		"№ ","Звідки / Куди   ","Дата","Відправлення / Прибуття","Тривалість","Вільних місць");
         JLabel columsName = new JLabel(s);
         columsName.setFont(new Font("Tahoma", Font.PLAIN, 15));
         columsName.setBounds(30, 70, 900, 20);
-        frame.add(columsName);
+        this.add(columsName);
         
         scrollPane = new JScrollPane();
-        frame.getContentPane().add(scrollPane);
+        this.getContentPane().add(scrollPane);
+        
+        JLabel newLab = new JLabel("new");
+        this.getContentPane().add(newLab);
+        
         backScrollPane = new JScrollPane();
-        frame.getContentPane().add(backScrollPane);
+        this.getContentPane().add(backScrollPane);
 
         scrollPane.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         scrollPane.setOpaque(true);
 
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         backButton.setBounds(40, 270, 270, 30);
-        frame.getContentPane().add(backButton);
+        this.getContentPane().add(backButton);
 
         foundRoutesButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         foundRoutesButton.setBounds(650, 270, 270, 30);
-        frame.getContentPane().add(foundRoutesButton);
+        this.getContentPane().add(foundRoutesButton);
     }
 
     public void setTwoWayTicket(Boolean b){

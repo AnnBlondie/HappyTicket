@@ -11,36 +11,35 @@ public class ProcessController {
     private UserData userDataView;
 
     public ProcessController(DataBase dataBase) {
-
         this.dataBase = dataBase;
-        //initializing first view with list of stations from our database
+
         searchTrainView = new SearchTrain(this.dataBase.selectAllStations());
         foundRoutesView = new FoundRoutes();
         seatSelectionView = new SeatSelection();
-        UserData userDataView = new UserData();
+        userDataView = new UserData();
         
-        //adding listener to react on first view's button
-        searchTrainView.addSearchTrainListener(new SearchTrainerListener());
+        searchTrainView.addSearchListener(new SearchTrainListener());
         
-        //adding listeners to react on second view's buttons
         foundRoutesView.addBackButtonListener(new FoundRoutesBackListener());
         foundRoutesView.addFoundRoutesListener(new FoundRoutesListener());
         
-        //adding listeners to react on third view's buttons
         seatSelectionView.addCanselSeatSelectionListener(new CanselSeatSelectionListener());
         seatSelectionView.addReserveSeatSelectionListener(new ResearveSeatListener());
         
-        //show first view
+        userDataView.addDeleteListener(new CanselResearveSeatListener());
+        userDataView.addSendListener(new ResearveSeatListener());
+        
         searchTrainView.setVisible(true);
     }
 
-    //creating second view by first view's data
-    class SearchTrainerListener implements ActionListener {
+    class SearchTrainListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
                 searchTrainView.setVisible(false);
-                foundRoutesView.setTwoWayTicket(searchTrainView.returnButton.isSelected());
+                foundRoutesView.initialize();
+
+                foundRoutesView.setTwoWayTicket(searchTrainView.returnButtonPressed());
                 Map<Train, String> there = 
                 		dataBase.selectTrainFromTo(searchTrainView.sourseStation.getSelectedItem().toString(),
                         searchTrainView.destinationStation.getSelectedItem().toString(),
@@ -58,12 +57,11 @@ public class ProcessController {
         }
     }
  
-    //return back from second view to first
     class FoundRoutesBackListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             try {
-                foundRoutesView.setVisible(false);           
+                foundRoutesView.setVisible(false);  
                 searchTrainView.setVisible(true);
             } catch (Exception e) {
                 //do nothing
@@ -77,15 +75,18 @@ public class ProcessController {
         public void actionPerformed(ActionEvent arg0) {
             try {
                 foundRoutesView.setVisible(false);
-                
+                seatSelectionView.initialize();
                 if(foundRoutesView.getTwoWayTicket()){
                 	seatSelectionView.setTwoTrains(
                 			foundRoutesView.thereTrainsButtonGroup.getSelection().getActionCommand(),
                 			foundRoutesView.backTrainsButtonGroup.getSelection().getActionCommand());
+                    dataBase.AddTrainData(seatSelectionView.getForwardTrain());
+
                 }
                 else{
                     seatSelectionView.setTrain(foundRoutesView.thereTrainsButtonGroup.getSelection()
                     		.getActionCommand());
+                    dataBase.AddTrainData(seatSelectionView.getForwardTrain());
                 }
                 seatSelectionView.setVisible(true);
             } catch (Exception e) {
@@ -94,7 +95,6 @@ public class ProcessController {
         }
     }
 
-    //return back from third view to second
     class CanselSeatSelectionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {

@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
  * Created by aandreyeva on 1/15/2015.
  */
 
-public final class UserData extends JFrame {//<-if we use JFrame later, we don't need to extend it
+public final class UserData extends JFrame {
 
-    private JPanel thePanel = new JPanel();//<-here we better use JFrame
+    private JPanel thePanel = new JPanel();
     private JLabel label1 = new JLabel("Бронювання створене"); //Reservation #?
     private JLabel label2 = new JLabel("Час виїзду | Маршрут | Місце | Вартість");
     private JTextField textField1 = new JTextField(42);//Think how to input reservation details into this field
@@ -20,14 +20,9 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
     private Icon s = new ImageIcon(getClass().getResource("S.png"));
     private JButton button2 = new JButton("Відправити деталі бронювання", s);
 
-    public void setVisible(boolean b) {//to show frame without making it public
-  //         this.setVisible(true);		//<-unfortunately controller cann't use this function if we have JPanel, don't know why
-    }
-
-    //Constructor
+     //Constructor
     UserData() {
-        //<-if we change JPanel to JFrame, "this" must be changed to "thePlane" and even then components will not appear as they should :(
-        this.setSize(650, 450);//window size
+        this.setBounds(100, 100, 950, 350);//window size
         Toolkit tk = Toolkit.getDefaultToolkit();//creating Toolkit object
         Dimension dim = tk.getScreenSize();
         int xPOS = (dim.width / 2) - (this.getWidth() / 2);
@@ -36,7 +31,7 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Щасливий Квиток: Завершення бронювання квитка");
-        thePanel.setBackground(Color.cyan);
+        thePanel.setBackground(Color.getHSBColor(0.5f, 0.2f, 0.8f));
         thePanel.add(label1);
         thePanel.add(label2);
         thePanel.add(textField1);
@@ -53,7 +48,7 @@ public final class UserData extends JFrame {//<-if we use JFrame later, we don't
         c.gridy = 2;
         thePanel.add(button2, c);
         this.add(thePanel);
-        this.setVisible(true);
+        //this.setVisible(true);
         textField1.requestFocus();
     }
 
